@@ -1,0 +1,19 @@
+// Ajout de "mysql" => Permet de se connecter à la BDD MySQL
+const mysql = require('mysql');
+// Masquage des infos importantes dans le fichier .env
+require('dotenv').config()
+
+// Création de la connexion à la BDD MySQL
+const db = mysql.createConnection({
+    host: process.env.DB_HOST, 
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+  });
+
+// Connexion à la BDD
+db.connect(function(err) {
+    if (err) throw err;
+    console.log("Connecté à la base de données MySQL!");
+  });
+
+module.exports = db;

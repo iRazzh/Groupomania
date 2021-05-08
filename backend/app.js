@@ -8,24 +8,14 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 // Ajout de "path" => Permet de travailler avec le système de fichier
 const path = require('path');
-// Ajout de "mysql" => Permet de se connecter à la BDD MySQL
-const mysql = require('mysql');
-// Masquage des infos importantes dans le fichier .env
-require('dotenv').config()
 
-// Création de la connexion à la BDD MySQL
-const db = mysql.createConnection({
-  host: process.env.DB_HOST, 
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
 
-});
-
-// Connexion à la BDD
-db.connect(function(err) {
-  if (err) throw err;
-  console.log("Connecté à la base de données MySQL!");
-});
+// Importation de la route dédiée aux utilisateurs
+const userRoutes = require('./routes/user');
+// Importation de la route dédiée aux posts
+const postRoutes = require('./routes/post');
+// Importation de la route dédiée aux commentaires
+const commentsRoutes = require('./routes/commentaire');
 
 // Système de sécurité CORS
 app.use((req, res, next) => {
@@ -37,9 +27,17 @@ app.use((req, res, next) => {
 
 // Transformation des données en un objet JSON
 app.use(bodyParser.json());
+
 // Active helmet
 app.use(helmet());
+
 // Permet de charger les fichiers qui sont dans 'images'
 app.use('/images', express.static(path.join(__dirname, 'images')));
+
+// Routes API => user
+app.use('/api/auth', userRoutes);
+// Routes API => post
+app.use('/api/post', postRoutes);
+// Routes API => comments
 
 module.exports = app;
