@@ -3,22 +3,23 @@ const fs = require('fs');
 const Post = require('../models/Post');
 
 // Création d'un post
-exports.createPost = (req, res, next) => {
-    const postObject = JSON.parse(req.body.post);
-    const post = new Post({
-        ...postObject,
-        imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-    });
+exports.createPost = (req, res, next) => {    
+    let image = "";
+    if (req.file) {
+        image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+    }
+    const post = new Post ({
+        id_user: req.body.id_user,
+        contenu: req.body.contenu,
+        image: image
+    })
     db.query(`INSERT INTO post SET ?`, post, (error, result) => {
         if(error) {
             return res.status(400).json({ error: "Le post n'a pas pu être crée!" });
         }
         return res.status(201).json ({ message: "Post crée!" })
     })
-    post.save()
-    .then(() => res.status(201).json({ message: "Post enregistré!" }))
-    .catch((error) => res.status(400).json({ error }));
-};
+}
 
 // Modifier un post
 exports.modifyPost = (req, res, next) => {

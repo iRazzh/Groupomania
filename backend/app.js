@@ -39,5 +39,6 @@ app.use('/api/auth', userRoutes);
 // Routes API => post
 app.use('/api/post', postRoutes);
 // Routes API => comments
+app.use('/api/comment', commentsRoutes);
 
 module.exports = app;

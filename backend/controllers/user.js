@@ -2,7 +2,6 @@ const User = require('../models/User');
 const bcrypt = require("bcrypt"); // Utilisation de "bcrypt" pour hasher le mdp
 const jwt = require('jsonwebtoken'); // Utilisation de "jsonwebtoken" pour attribuer un token lors de la connexion
 const db = require('../sqlBDD');
-const { response } = require('express');
 require('dotenv').config() // Masquage des infos importantes dans le fichier .env
 
 // Inscription d'un utilisateur
@@ -55,6 +54,7 @@ exports.login = (req, res, next) => {
                 } 
                 res.status(200).json({ 
                     userId: result[0].id_user,
+                    admin: result[0].admin,
                     token: jwt.sign({
                         userId: result[0].id_user},
                         process.env.TOKEN,
