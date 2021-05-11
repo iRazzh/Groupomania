@@ -15,7 +15,7 @@ const userRoutes = require('./routes/user');
 // Importation de la route dédiée aux posts
 const postRoutes = require('./routes/post');
 // Importation de la route dédiée aux commentaires
-const commentsRoutes = require('./routes/commentaire');
+const commentsRoutes = require('./routes/comment');
 
 // Système de sécurité CORS
 app.use((req, res, next) => {

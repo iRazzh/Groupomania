@@ -10,7 +10,7 @@ exports.createPost = (req, res, next) => {
     }
     const post = new Post ({
         id_user: req.body.id_user,
-        contenu: req.body.contenu,
+        content: req.body.contenu,
         image: image
     })
     db.query(`INSERT INTO post SET ?`, post, (error, result) => {
@@ -23,7 +23,7 @@ exports.createPost = (req, res, next) => {
 
 // Modifier un post
 exports.modifyPost = (req, res, next) => {
-    db.query(`UPDATE post SET contenu = '${req.body.contenu}'`, (error, result) => {
+    db.query(`UPDATE post SET content = '${req.body.content}'`, (error, result) => {
         if (error) {
             return res.status(400).json({ error: "Le post n'a pas pu être modifié" })
         }
@@ -43,7 +43,7 @@ exports.deletePost = (req, res, next) => {
 
 // Accès à tous les posts
 exports.getAllPost = (req, res, next) => {
-    db.query(`SELECT id, id_user, contenu, image, date, status FROM post INNER JOIN post ON id_user = id_user ORDER BY date DESC`, (error, result) => {
+    db.query(`SELECT id, id_user, content, image, date, status FROM post INNER JOIN post ON id_user = id_user ORDER BY date DESC`, (error, result) => {
         if (error) {
             return res.status(400).json({ error: "Vous ne pouvez pas accéder à tous les posts" })
         }

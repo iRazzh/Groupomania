@@ -5,11 +5,11 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 
 // Importation du "controller" concernant les "commentaire"
-const commentaireCtrl = require('../controllers/commentaire');
+const commentCtrl = require('../controllers/comment');
 
 // Router de la création d'un commentaire
-router.post('/:id/comment', auth, commentaireCtrl.createComment);
+router.post('/:id/comment', auth, commentCtrl.createComment);
 // Router de la suppression d'un commentaire
-router.delete('/comment/:id', auth, commentaireCtrl.deleteComment);
+router.delete('/comment/:id', auth, commentCtrl.deleteComment);
 
 module.exports = router;
