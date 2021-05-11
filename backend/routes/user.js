@@ -9,7 +9,8 @@ router.post('/signup', userCtrl.signup);
 // Router de la connexion
 router.post('/login', userCtrl.login);
 // Router de la suppression 
-router.delete('/delete', userCtrl.delete);
+router.delete('/delete/:id', userCtrl.delete);
 
+// Importer le auth
 
 module.exports = router;

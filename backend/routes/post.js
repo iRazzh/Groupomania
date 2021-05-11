@@ -7,6 +7,8 @@ const auth = require('../middleware/auth');
 // Importation du "controller" concernant les "post"
 const postCtrl = require('../controllers/post');
 
+// Rajouter le multer (a voir sur Git si jamais)
+
 // Router de la création du post
 router.post('/', auth, postCtrl.createPost);
 // Router de la modification du post

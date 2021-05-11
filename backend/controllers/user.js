@@ -40,13 +40,15 @@ exports.signup = (req, res, next) => {
 
 // Connexion d'un utilisateur 
 exports.login = (req, res, next) => {
+    console.log(req)
     const email = req.body.email;
     const password = req.body.password;
     let sql = `SELECT * FROM user WHERE email = ?`;
     db.query(sql, email, (error, result) => {
-        if(result =='') {
+        if(result =='' || result == undefined) {
             return res.status(401).json({ error : "Utilisateur introuvable" })
         } else {
+            console.log(result)
             bcrypt.compare(password, result[0].password)
             .then(valid => {
                 if(!valid) {
@@ -67,7 +69,8 @@ exports.login = (req, res, next) => {
 
 // Supprime le compte d'un utilisateur
 exports.delete = (req, res, next) => {
-    db.query(`DELETE FROM user WHERE id_user = '${req.params.id}'`, (error, result) => {
+    console.log(req.params)
+    db.query(`DELETE FROM user WHERE id_user = ?`, req.params.id, (error, result) => {
         if (error) {
             return res.status(400).json({ error : "L'utilisateur n'a pas pu être supprimé"})
         }

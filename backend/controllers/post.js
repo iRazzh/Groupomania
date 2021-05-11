@@ -2,6 +2,7 @@ const db = require('../sqlBDD');
 const fs = require('fs');
 const Post = require('../models/Post');
 
+// Adapter le create (comme le comment)
 // Création d'un post
 exports.createPost = (req, res, next) => {    
     let image = "";
@@ -21,6 +22,7 @@ exports.createPost = (req, res, next) => {
     })
 }
 
+// Adapter le modify (comme le comment)
 // Modifier un post
 exports.modifyPost = (req, res, next) => {
     db.query(`UPDATE post SET content = '${req.body.content}'`, (error, result) => {
@@ -31,6 +33,7 @@ exports.modifyPost = (req, res, next) => {
     })
 }
 
+// Adapter le delete (comme user)
 // Supprimer un post
 exports.deletePost = (req, res, next) => {
     db.query(`DELETE FROM post WHERE id = ${req.params.id}`, (error, result) => {
@@ -43,7 +46,7 @@ exports.deletePost = (req, res, next) => {
 
 // Accès à tous les posts
 exports.getAllPost = (req, res, next) => {
-    db.query(`SELECT id, id_user, content, image, date, status FROM post INNER JOIN post ON id_user = id_user ORDER BY date DESC`, (error, result) => {
+    db.query(`SELECT id, post.id_user, content, image, date, status, name FROM post INNER JOIN user ON user.id_user = post.id_user ORDER BY date DESC`, (error, result) => {
         if (error) {
             return res.status(400).json({ error: "Vous ne pouvez pas accéder à tous les posts" })
         }
