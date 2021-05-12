@@ -40,7 +40,6 @@ exports.signup = (req, res, next) => {
 
 // Connexion d'un utilisateur 
 exports.login = (req, res, next) => {
-    console.log(req)
     const email = req.body.email;
     const password = req.body.password;
     let sql = `SELECT * FROM user WHERE email = ?`;
@@ -70,7 +69,7 @@ exports.login = (req, res, next) => {
 // Supprime le compte d'un utilisateur
 exports.delete = (req, res, next) => {
     console.log(req.params)
-    db.query(`DELETE FROM user WHERE id_user = ?`, req.params.id, (error, result) => {
+    db.query(`DELETE FROM user WHERE id_user = ?` , req.params.id, (error, result) => {
         if (error) {
             return res.status(400).json({ error : "L'utilisateur n'a pas pu être supprimé"})
         }

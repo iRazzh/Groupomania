@@ -9,9 +9,9 @@ const commentCtrl = require('../controllers/comment');
 
 // Router de la création d'un commentaire
 router.post('/:id/comment', auth, commentCtrl.createComment);
-// Router de la suppression d'un commentaire
-router.delete('/comment/:id', auth, commentCtrl.deleteComment);
 // Router de la modification d'un commentaire
 router.put('/comment/:id', auth, commentCtrl.modifyComment);
+// Router de la suppression d'un commentaire
+router.delete('/comment/:id', auth, commentCtrl.deleteComment);
 
 module.exports = router;

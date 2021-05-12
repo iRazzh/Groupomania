@@ -13,7 +13,6 @@ exports.createComment = (req, res, next) => {
     })
     db.query(`INSERT INTO comment SET ?`, comment, (error, result) => {
         if(error) {
-            console.log(error)
             res.status(400).json({ error: 'Commentaire non crée' })
         } else {
             res.status(200).json({ result })
@@ -31,10 +30,9 @@ exports.modifyComment = (req, res, next) => {
     })
 }
 
-// Adapter le delete (comme user)
 // Suppression d'un commentaire
 exports.deleteComment = (req, res, next) => {
-    db.query(`DELETE FROM comment WHERE id = ${req.params.id}`, (error, result) => {
+    db.query(`DELETE FROM comment WHERE id = ?` , req.params.id, (error, result) => {
         if (error) {
             return res.status(400).json({ error: "Le commentaire n'a pas pu être supprimé" })
         }
