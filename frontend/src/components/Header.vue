@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <img src="../assets/logo_header_groupomania.png" alt="Logo de Groupomania">
-        <h1>Coucou</h1>
+        <p>Le réseau social de votre entreprise !</p>
     </div>
 </template>
 
@@ -12,5 +12,15 @@ export default {
 </script>
 
 <style scoped>
+.header{
+    text-align: center;
+}
 
+img{
+    width: 18%;
+}
+p{
+    font-size: 20px;
+    margin: 0;
+}
 </style>
