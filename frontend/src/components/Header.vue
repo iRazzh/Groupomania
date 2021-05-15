@@ -22,5 +22,6 @@ img{
 p{
     font-size: 20px;
     margin: 0;
+    margin-bottom: 3rem;
 }
 </style>
