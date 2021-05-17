@@ -1,10 +1,15 @@
 <template>
   <div class="loginForm">
 
-    <form>
+    <form @submit.prevent = login()>
       <div class="formLogin">
         <label>Email :</label> <br />
-        <input class="emailLogin" type="text" placeholder="Email" required />
+        <input 
+        class="emailLogin" 
+        type="text" 
+        placeholder="Email" 
+        required 
+        />
         <br />
       </div>
 
@@ -19,26 +24,14 @@
         <br />
       </div>
 
-      <div class="formLogin">
-        <label>Confirmation du mot de passe :</label> <br />
-        <input
-          class="confirmPasswordLogin"
-          type="password"
-          placeholder="Confirmation"
-          required
-        />
-        <br />
-      </div>
-
-      <button class="btnLogin" type="sumbit">Connexion</button> <br />
+      <button class="btnLogin" type="submit">Connexion</button> <br />
       <p class="errorLogin"></p>
+
+      <p class="wantSignup">Vous souhaitez vous inscrire ?</p>
+      <nav><router-link to="/signup">S'inscrire</router-link></nav>
     </form>
 
-    <p class="wantSignup">Vous souhaitez vous inscrire ?</p>
-
-    <nav class="navSignup">
-      <router-link to="/signup">S'inscrire</router-link>
-    </nav>
+    
 
   </div>
 </template>
@@ -51,26 +44,23 @@ export default {
 
   data() {
     return {
-      message: "",
+      email: "",
+      password: "",
     };
   },
 
   methods: {
+
     login() {
       const email = document.getElementsByClassName("emailLogin")[0].value;
-      const password = document.getElementsByClassName("passwordLogin")[0]
-        .value;
-      const validPassword = document.getElementsByClassName(
-        "confirmPasswordLogin"
-      )[0].value;
-      console.log(validPassword),
-        axios
-          .post(
-            "http://localhost:3000/api/auth/login",
+      const password = document.getElementsByClassName("passwordLogin")[0].value;
+
+        axios.post("http://localhost:3000/api/auth/login",
             {
               email,
               password,
             },
+
             {
               header: {
                 "Content-Type": "application/json",
@@ -79,11 +69,14 @@ export default {
           )
           .then((res) => {
             localStorage.setItem("user", JSON.stringify(res.data));
+            console.log("Vous êtes connecté!")
+            // Mettre la redirection
           })
           .catch((error) => {
             console.log("Problème lors de l'identhification!" + error);
           });
     },
+
   },
 };
 </script>
@@ -106,9 +99,6 @@ input {
 .wantSignup {
   text-align: center;
   margin: 4rem 0 3rem 0;
-}
-.navSignup {
-  text-align: center;
 }
 a{
     text-decoration: none;
