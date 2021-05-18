@@ -70,8 +70,7 @@ export default {
             }
       )
       .then((res) => {
-
-        localStorage.setItem("token", JSON.stringify(res.data));
+        localStorage.setItem("token", (res.data.token));
         this.$router.push('/wall');
 
       })

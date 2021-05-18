@@ -4,6 +4,7 @@ const Post = require('../models/Post');
 
 // Création d'un post
 exports.createPost = (req, res, next) => {    
+    console.log(req.body)
     date = new Date();
     let image = "";
     console.log("JE suis la 1");
@@ -13,7 +14,7 @@ exports.createPost = (req, res, next) => {
     }
 
     const post = new Post ({
-        id_user: req.body.id_user,
+        id_user: req.id_user,
         content: req.body.content,
         image: image,
         date: date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay(),
@@ -24,7 +25,8 @@ exports.createPost = (req, res, next) => {
 
     db.query(`INSERT INTO post SET ?`, post, (error, result) => {
         if(error) {
-            return res.status(400).json({ error: "Le post n'a pas pu être crée!" });
+            // return res.status(400).json({ error: "Le post n'a pas pu être crée!" });
+            return res.status(400).json({ error: error });
         }
         return res.status(201).json ({ message: "Post crée!" })
     });

@@ -2,11 +2,11 @@
     <div class="createPost">
         <h2>Quelque chose à nous raconter ?</h2>
         <div class="newPost">
-            <form @submit.prevent="createPost">
+            <form class="formCreate" @submit.prevent="createPost">
 
                 <div class="formNewPost">
                     <label for="content"></label>
-                    <textarea name="content" class="contentNewPost" type="text" placeholder="Quoi de beau ?" required v-model="content"></textarea> <br>
+                    <textarea name="content" class="contentNewPost" placeholder="Quoi de beau ?" required v-model="content"></textarea> <br>
                 </div>
 
                 <div class="formNewPost">
@@ -29,34 +29,15 @@ export default {
     data() {
         return {
             content: "",
-            image: null
         };
     },
     methods: {
-        upload: function(e) 
-        {
-           var files = e.target.files || e.dataTransfer.files;
-           if (files.length <= 0) this.createImage(files[0]);
-        },
-        createImage: function(file) 
-        {
-            let reader = new FileReader();
-            let vm = this; // this correspond à l'objet Vue
 
-            reader.onload = (e) => {
-                vm.image = e.target.result;
-            };
-
-            reader.readAsDataURL(file);
-        },
         createPost: function() 
         {
+            const formCreate = document.getElementsByClassName("formCreate")[0];
             const token = localStorage.getItem("token");
-           const data = new FormData();
-                        
-           data.append("content", this.content);
-           data.append("image", "");
-            
+            let data = new FormData(formCreate);
                 
             axios.post("http://localhost:3000/api/post/create", data, {
                 headers: {
@@ -68,12 +49,12 @@ export default {
             {
                     if (res) 
                     {
-                        this.$router.reload();
+                        window.location.reload()
                     }
             })
             .catch(error => 
             {
-                console.log(JSON.stringify(error))
+                console.log( error )
             });
         }
     }
