@@ -13,12 +13,12 @@ const postCtrl = require('../controllers/post');
 // Rajouter le multer (a voir sur Git si jamais)
 
 // Router de la création du post
-router.post('/', auth, multer, postCtrl.createPost);
+router.post('/create', auth, multer, postCtrl.createPost);
 // Router de la modification du post
 router.put('/:id', auth, multer, postCtrl.modifyPost);
 // Router de la suppression du post
 router.delete('/:id', auth, postCtrl.deletePost);
 // Router de l'accès à tous les posts 
-router.get('/', auth, postCtrl.getAllPost);
+router.get('/all', auth, postCtrl.getAllPost);
 
 module.exports = router;

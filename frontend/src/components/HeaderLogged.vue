@@ -1,13 +1,13 @@
 <template>
     <div class="header">
-        <router-link to="/"><img src="../assets/logo_header_groupomania.png" alt="Logo de Groupomania"></router-link>
-        <p>Le réseau social de votre entreprise !</p>
+        <router-link to="/"><img src="../assets/icon.png" alt="Logo de Groupomania"></router-link>
+        <p>N'hésitez plus, partagez vos plus beaux souvenirs !</p>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Header',
+    name: 'HeaderLogged',
     }
 </script>
 

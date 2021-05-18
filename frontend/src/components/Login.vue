@@ -5,10 +5,11 @@
       <div class="formLogin">
         <label>Email :</label> <br />
         <input 
-        class="emailLogin" 
-        type="text" 
-        placeholder="Email" 
-        required 
+          class="emailLogin" 
+          type="text" 
+          placeholder="Email" 
+          required 
+          v-model = "email"
         />
         <br />
       </div>
@@ -20,19 +21,20 @@
           type="password"
           placeholder="Mot de passe"
           required
+          v-model = "password"
         />
         <br />
       </div>
 
       <button class="btnLogin" type="submit">Connexion</button> <br />
       <p class="errorLogin"></p>
-
-      <p class="wantSignup">Vous souhaitez vous inscrire ?</p>
-      <nav><router-link to="/signup">S'inscrire</router-link></nav>
     </form>
 
-    
-
+      <router-link to="/signup" class="signupNav">
+        <div class="wantSignup">
+          Inscrivez-vous ici !
+        </div>
+      </router-link>
   </div>
 </template>
 
@@ -51,33 +53,34 @@ export default {
 
   methods: {
 
-    login() {
-      const email = document.getElementsByClassName("emailLogin")[0].value;
-      const password = document.getElementsByClassName("passwordLogin")[0].value;
+    login: function() {
 
-        axios.post("http://localhost:3000/api/auth/login",
+      const email = this.email;
+      const password = this.password;
+
+      axios.post("http://localhost:3000/api/auth/login",
             {
               email,
               password,
             },
-
             {
               header: {
                 "Content-Type": "application/json",
               },
             }
-          )
-          .then((res) => {
-            localStorage.setItem("user", JSON.stringify(res.data));
-            console.log("Vous êtes connecté!")
-            // Mettre la redirection
-          })
-          .catch((error) => {
-            console.log("Problème lors de l'identhification!" + error);
-          });
-    },
+      )
+      .then((res) => {
 
-  },
+        localStorage.setItem("token", JSON.stringify(res.data));
+        this.$router.push('/wall');
+
+      })
+      .catch((error) => {
+        console.log("Problème lors de l'identhification!" + error);
+      });
+
+    },
+  }
 };
 </script>
 
@@ -98,14 +101,24 @@ input {
 }
 .wantSignup {
   text-align: center;
-  margin: 4rem 0 3rem 0;
+  margin: auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 15%;
+  padding: 10px;
+  box-shadow: 0.3rem 0.5rem 0.5rem black;
 }
-a{
+.btnLogin{
     text-decoration: none;
     color: black;
     border: 1px black transparent;
     border-radius: 10px;
     padding: 1rem;
     background: rgb(175, 175, 175);
+    margin-bottom: 3rem;
+}
+.signupNav{
+    text-decoration: none;
+    color: black;
 }
 </style>

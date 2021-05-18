@@ -2,19 +2,21 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config()
 
 module.exports = (req, res, next) => {
-    try {
+    try 
+    {
         // Récupération du token dans le header, et du deuxième élément du tableau
-        const token = req.headers.authorization.split(' ')[1];
+        const token = req.headers.authorization.replace("Bearer ", "");
         // Vérification des token
         const decodedToken = jwt.verify(token, process.env.TOKEN);
-        // Vérification de l'userId avec celui encodé du token
-        const userId = decodedToken.userId;
-        if (req.body.id_user && req.body.id_user !== userId) {
-            throw 'Invalid user ID';
-        } else {
-            next()
-        }
-    } catch {
+        
+        // Pour récupérer le user Id
+        req.body.id_user = decodedToken.userId; 
+        req.body.admin = decodedToken.adminRank;
+        
+        next();
+    } 
+    catch(err) 
+    {
         res.status(401).json({ error: 'Requête non authentifiée !'});
     }
 };

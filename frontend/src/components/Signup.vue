@@ -38,10 +38,14 @@
 
       <button class="btnSignup" type="submit">S'inscrire !</button> <br />
       <p class="errorSignup"></p>
-
-      <p class="wantLogin">Vous êtes déjà inscrits ?</p>
-      <nav><router-link to="/">Se connecter</router-link></nav>
     </form>
+
+      <router-link to="/" class="loginNav">
+        <div class="wantLogin">
+          Connectez-vous ici !
+        </div>
+      </router-link>
+
   </div>
 </template>
 
@@ -56,6 +60,7 @@ export default {
       name: "",
       email: "",
       password: "",
+      password_confirmation: "",
     };
   },
 
@@ -65,8 +70,8 @@ export default {
       const name = document.getElementsByClassName("nameSignup")[0].value;
       const email = document.getElementsByClassName("emailSignup")[0].value;
       const password = document.getElementsByClassName("passwordSignup")[0].value;
-      const validPassword = document.getElementsByClassName("verifPasswordSignup")[0].value;
-      if (password === validPassword) {
+      const password_confirmation = document.getElementsByClassName("verifPasswordSignup")[0].value;
+      if (password === password_confirmation && password.length > 0) {
         axios.post("http://localhost:3000/api/auth/signup",
             {
               name,
@@ -81,12 +86,14 @@ export default {
             }
         )
         .then((res) => {
-            alert("Votre compte vient d'être crée !");
-            console.log(res)
-        })
+            localStorage.setItem("user", JSON.stringify(res.data.user))
+            console.log(localStorage)
+            this.$router.push('/wall')
+            }) 
+
         .catch((error) => {console.log("Problème lors de l'identhification!" + error);
           });
-      } else if (password !== validPassword) {
+      } else if (password !== password_confirmation) {
           alert("Les mots de passe ne sont pas identiques");
       }
     },
@@ -112,14 +119,24 @@ input {
 }
 .wantLogin {
   text-align: center;
-  margin: 4rem 0 3rem 0;
-}
-a {
-  text-decoration: none;
-  color: black;
-  border: 1px black transparent;
+  margin: auto;
+  border: 1px solid black;
   border-radius: 10px;
-  padding: 1rem;
-  background: rgb(175, 175, 175);
+  width: 15%;
+  padding: 10px;
+  box-shadow: 0.3rem 0.5rem 0.5rem black;
+}
+.btnSignup {
+    text-decoration: none;
+    color: black;
+    border: 1px black transparent;
+    border-radius: 10px;
+    padding: 1rem;
+    background: rgb(175, 175, 175);
+    margin-bottom: 3rem;
+}
+.loginNav{
+    text-decoration: none;
+    color: black;
 }
 </style>

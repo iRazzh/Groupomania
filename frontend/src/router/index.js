@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 
 import Home from '@/views/Home.vue'
 import Signup from '@/views/Signup.vue'
+import Wall from '@/views/Wall.vue'
 
 const routes = [
   // Route page d'accueil
@@ -16,6 +17,13 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component: Signup
+  },
+
+  // Route wall
+  {
+    path: '/wall',
+    name: 'Wall',
+    component: Wall
   },
   
   // Redirection page d'accueil si aucune page trouvée

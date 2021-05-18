@@ -40,30 +40,35 @@ exports.signup = (req, res, next) => {
 
 // Connexion d'un utilisateur 
 exports.login = (req, res, next) => {
+
     const email = req.body.email;
     const password = req.body.password;
     let sql = `SELECT * FROM user WHERE email = ?`;
+
     db.query(sql, email, (error, result) => {
-        if(result =='' || result == undefined) {
+
+        if(result === "" || result == undefined)
+        {
             return res.status(401).json({ error : "Utilisateur introuvable" })
-        } else {
-            console.log(result)
+        } 
+        else 
+        {
             bcrypt.compare(password, result[0].password)
             .then(valid => {
-                if(!valid) {
-                    return res.status(401).json({ error : "Mot de passe incorrect" })
-                } 
-                res.status(200).json({ 
-                    userId: result[0].id_user,
-                    admin: result[0].admin,
-                    token: jwt.sign({
-                        userId: result[0].id_user},
-                        process.env.TOKEN,
-                        { expiresIn: '24h' })
-                })
-            })
+                
+                if(!valid) return res.status(401).json({ error : "Mot de passe incorrect" });
+                
+                const token = jwt.sign(
+                    {
+                        userId: result[0].id_user,
+                        adminRank: result[0].admin
+                    }, process.env.TOKEN, { expiresIn: '24h' }
+                );
+
+                res.status(200).json({ token });
+            });
         }
-    })
+    });
 };
 
 // Supprime le compte d'un utilisateur
