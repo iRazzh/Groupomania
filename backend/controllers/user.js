@@ -56,13 +56,16 @@ exports.login = (req, res, next) => {
             bcrypt.compare(password, result[0].password)
             .then(valid => {
                 
-                if(!valid) return res.status(401).json({ error : "Mot de passe incorrect" });
-                
+                if(!valid) {
+                    return res.status(401).json({ error : "Mot de passe incorrect" });
+                }
                 const token = jwt.sign(
                     {
                         userId: result[0].id_user,
-                        adminRank: result[0].admin
-                    }, process.env.TOKEN, { expiresIn: '24h' }
+                        adminRank: result[0].admin,
+                        name: result[0].name,
+                    }, process.env.TOKEN, 
+                    { expiresIn: '24h' }
                 );
 
                 res.status(200).json({ token });
@@ -73,8 +76,8 @@ exports.login = (req, res, next) => {
 
 // Supprime le compte d'un utilisateur
 exports.delete = (req, res, next) => {
-    console.log(req.params)
-    db.query(`DELETE FROM user WHERE id_user = ?` , req.params.id, (error, result) => {
+    const id = req.params.id
+    db.query(`DELETE FROM user WHERE id_user = ?` , id, (error, result) => {
         if (error) {
             return res.status(400).json({ error : "L'utilisateur n'a pas pu être supprimé"})
         }

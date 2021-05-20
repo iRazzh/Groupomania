@@ -1,7 +1,10 @@
 <template>
     <div class="header">
-        <router-link to="/"><img src="../assets/icon.png" alt="Logo de Groupomania"></router-link>
+        <img src="../assets/icon.png" alt="Logo de Groupomania">
         <p>N'hésitez plus, partagez vos plus beaux souvenirs !</p>
+        <router-link to="/profile">
+            <p>Votre profil</p>
+        </router-link>
     </div>
 </template>
 
@@ -23,5 +26,9 @@ p{
     font-size: 20px;
     margin: 0;
     margin-bottom: 3rem;
+}
+a{
+    text-decoration: none;
+    color: red;
 }
 </style>

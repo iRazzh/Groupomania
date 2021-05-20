@@ -24,8 +24,11 @@
 
 <script>
 import axios from 'axios'
+
 export default {
+
     name: 'CreatePost',
+
     data() {
         return {
             content: "",
@@ -59,7 +62,6 @@ export default {
         }
     }
 }
-
 </script>
 
 <style scoped>

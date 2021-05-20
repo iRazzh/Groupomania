@@ -7,8 +7,7 @@ exports.createPost = (req, res, next) => {
     console.log(req.body)
     date = new Date();
     let image = "";
-    console.log("JE suis la 1");
-
+    
     if (req.file) {
         image = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
     }
@@ -21,8 +20,6 @@ exports.createPost = (req, res, next) => {
         status: 1
     });
 
-    console.log("JE suis la");
-
     db.query(`INSERT INTO post SET ?`, post, (error, result) => {
         if(error) {
             // return res.status(400).json({ error: "Le post n'a pas pu être crée!" });
@@ -30,8 +27,6 @@ exports.createPost = (req, res, next) => {
         }
         return res.status(201).json ({ message: "Post crée!" })
     });
-
-    console.log("JE suis ici");
 }
 
 // Modifier un post

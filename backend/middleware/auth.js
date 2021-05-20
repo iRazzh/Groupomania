@@ -8,13 +8,11 @@ module.exports = (req, res, next) => {
         const token = req.headers.authorization.replace("Bearer ", "");
         // Vérification des token
         const decodedToken = jwt.verify(token, process.env.TOKEN);
-        console.log(decodedToken)
         // Pour récupérer le user Id
         req.id_user = decodedToken.userId; 
         req.admin = decodedToken.adminRank;
         
         if(decodedToken.userId == undefined) {
-            console.log('Coucou')
             throw new Error
         }
         next();

@@ -87,7 +87,6 @@ export default {
         )
         .then((res) => {
             localStorage.setItem("user", JSON.stringify(res.data.user))
-            console.log(localStorage)
             this.$router.push('/wall')
             }) 
 
