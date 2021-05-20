@@ -60,16 +60,17 @@ exports.login = (req, res, next) => {
                     return res.status(401).json({ error : "Mot de passe incorrect" });
                 }
                 const id = result[0].id_user
+                const name = result[0].name
                 const token = jwt.sign(
                     {
                         userId: id,
                         adminRank: result[0].admin,
-                        name: result[0].name,
+                        name: name,
                     }, process.env.TOKEN, 
                     { expiresIn: '24h' }
                 );
 
-                res.status(200).json({ token, userId:id});
+                res.status(200).json({ token, userId:id, name:name});
             });
         }
     });

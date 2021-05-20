@@ -27,15 +27,19 @@ export default {
         return {
             token: "",
             userId: "",
+            name: "",
         }
+    },
+
+    mounted(){
+        const name = localStorage.getItem('name')
+        document.getElementsByClassName("userName")[0].innerHTML = name
     },
 
     methods: {
         deleteProfile() {
         const token = localStorage.getItem('token')
         const id = localStorage.getItem('userId')
-
-        console.log(id)
 
         axios.delete('http://localhost:3000/api/auth/delete/' + id, {
                 headers: {
