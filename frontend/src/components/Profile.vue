@@ -21,39 +21,40 @@ import axios from 'axios'
 
 export default {
 
-    name: 'Profile',
-
     data() {
         return {
-            userId: parseInt(localStorage.getItem("userId")),
-            token: localStorage.getItem("token"),
+            userId: "",
         }
     },
 
+    name: 'Profile',
+
     methods: {
         deleteProfile() {
-            const id = this.userId;
-            console.log(id)
+            const token = localStorage.getItem("token")
+            console.log(token)
 
-            axios.delete('http://localhost:3000/api/auth/delete/' + id, {
+            axios.delete('http://localhost:3000/api/auth/delete/' + localStorage.getItem("token"), {
                 headers: {
                     "Content-Type" : "application/json",
-                    "Authorization": `Bearer ` + this.token
+                    "Authorization": `Bearer ${token}`
                 }
             })
             .then(res => {
                 console.log(res);
                 if (res) {
-                    // localStorage.removeItem('token');
-                    // this.$router.push('/signup');
+                    localStorage.clear();
+                    this.$router.push('/signup'); 
                 }
             })
             .catch(error => {
                 console.log( error )
-            })
+            }
+            )
         }
     }
-    }
+}
+
 </script>
 
 <style scoped>

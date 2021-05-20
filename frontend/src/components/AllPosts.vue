@@ -6,6 +6,7 @@
             <div class="allPost">
                 <div class="post-content"> {{ post.content }} </div>
                 <div class="post-image"><img :src="post.image"></div>
+                <div class="post-comments"></div>
             </div>
         </article>
     </div>

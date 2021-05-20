@@ -85,9 +85,8 @@ export default {
                 },
             }
         )
-        .then((res) => {
-            localStorage.setItem("user", JSON.stringify(res.data.user))
-            this.$router.push('/wall')
+        .then(() => {
+            this.$router.push('/login')
             }) 
 
         .catch((error) => {console.log("Problème lors de l'identhification!" + error);
