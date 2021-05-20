@@ -1,14 +1,17 @@
-  
 <template>
     <div class="posts">
         <h3>L'actualité de vos collègues</h3>
         <article class="post" v-for="post in posts" :key="post.id">
-            <div class="allPost">
-                <div class="post-content"> {{ post.content }} </div>
-                <div class="post-image"><img :src="post.image"></div>
-                <div class="post-comments"></div>
+            <div class="comments" v-for="comment in comments" :key="comment.id">
+                <div class="allPost">
+                    <div class="post-content"> {{ post.content }} </div>
+                    <div class="post-image"><img :src="post.image"></div>
+                </div>
+                <div class="allComments">
+                    <div class="comment-content"> {{comment.content}} </div>
+                </div>
             </div>
-        </article>
+        </article>      
     </div>
 </template>
 
@@ -23,11 +26,13 @@ export default {
     data() {
         return {
             posts: [],
+            comments: [],
         }
     },
 
     mounted() {
             this.getAllPost();
+            this.getAllComments();
     },
 
     methods: {
@@ -42,9 +47,22 @@ export default {
             .then(res => {
                 this.posts = res.data;
             })
-        }
+        },
+        getAllComments() {
+            const token = localStorage.getItem("token")
+            axios.get("http://localhost:3000/api/comment/all", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(res => {
+                this.comments = res.data;
+            })
+        },
     }
 }
+
 </script>
 
 

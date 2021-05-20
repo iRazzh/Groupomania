@@ -49,7 +49,6 @@ export default {
       token: "",
       email: "",
       password: "",
-      userId: "",
     };
   },
 
@@ -73,8 +72,8 @@ export default {
       )
       .then((res) => {
         {
-          localStorage.setItem("token", (res.data.token));
-          localStorage.setItem("id", res.data.userId);
+          localStorage.setItem("token", (res.data.token))
+          localStorage.setItem("userId", (res.data.userId))
         }
         this.$router.push('/wall');
       })

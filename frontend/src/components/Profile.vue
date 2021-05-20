@@ -21,31 +21,35 @@ import axios from 'axios'
 
 export default {
 
+    name: 'Profile',
+
     data() {
         return {
+            token: "",
             userId: "",
         }
     },
 
-    name: 'Profile',
-
     methods: {
         deleteProfile() {
-            const token = localStorage.getItem("token")
-            console.log(token)
+        const token = localStorage.getItem('token')
+        const id = localStorage.getItem('userId')
 
-            axios.delete('http://localhost:3000/api/auth/delete/' + localStorage.getItem("token"), {
+        console.log(id)
+
+        axios.delete('http://localhost:3000/api/auth/delete/' + id, {
                 headers: {
                     "Content-Type" : "application/json",
                     "Authorization": `Bearer ${token}`
                 }
             })
             .then(res => {
-                console.log(res);
+
                 if (res) {
-                    localStorage.clear();
+                    localStorage.removeItem('token');
                     this.$router.push('/signup'); 
                 }
+
             })
             .catch(error => {
                 console.log( error )
