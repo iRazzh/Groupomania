@@ -1,13 +1,15 @@
 <template>
     <div class="posts">
         <h3>L'actualité de vos collègues</h3>
-        <article class="post" v-for="post in posts" :key="post.id">
+        <article class="post" v-for="post in posts" :key="post">
+            <router-link :to="{ name: 'OnePost', params: {id: post.id} }">
                 <div class="post-content"> {{ post.content }} </div>
                 <div class="post-image"><img :src="post.image"></div>
-                <div class="comments" v-for="comment in comments" :key="comment.id">
+                <div class="comments" v-for="comment in comments" :key="comment">
                     <div class="comment-content"> {{comment.content}} </div>
                 </div>
-        </article>      
+            </router-link>
+        </article>
     </div>
 </template>
 
@@ -84,5 +86,9 @@ export default {
 }
 img{
     border-radius: 10px;
+}
+a{
+    text-decoration: none;
+    color: black;
 }
 </style>

@@ -10,7 +10,6 @@ const multer = require('../middleware/multer-config');
 // Importation du "controller" concernant les "post"
 const postCtrl = require('../controllers/post');
 
-// Rajouter le multer (a voir sur Git si jamais)
 
 // Router de la création du post
 router.post('/create', auth, multer, postCtrl.createPost);
@@ -20,5 +19,7 @@ router.put('/:id', auth, multer, postCtrl.modifyPost);
 router.delete('/:id', auth, postCtrl.deletePost);
 // Router de l'accès à tous les posts 
 router.get('/all', auth, postCtrl.getAllPost);
+// Router de l'accès à un post
+router.get('/:id', auth, postCtrl.getOnePost);
 
 module.exports = router;

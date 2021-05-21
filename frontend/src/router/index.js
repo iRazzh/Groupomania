@@ -4,6 +4,7 @@ import Home from '@/views/Home.vue'
 import Signup from '@/views/Signup.vue'
 import Wall from '@/views/Wall.vue'
 import Profile from '@/views/Profile.vue'
+import OnePost from '@/views/OnePost.vue'
 
 const routes = [
   // Route page d'accueil
@@ -34,6 +35,13 @@ const routes = [
     component: Profile
   },
   
+  // Route OnePost
+  {
+    path: '/onepost/:id',
+    name: 'OnePost',
+    component: OnePost
+  },
+
   // Redirection page d'accueil si aucune page trouvée
   {
     path: "/:catchAll(.*)",
@@ -46,10 +54,10 @@ const router = new createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  console.log(to.name)
-  console.log(from.name)
-  next();
-})
+// router.beforeEach((to, from, next) => {
+//   console.log(to.name)
+//   console.log(from.name)
+//   next();
+// })
 
 export default router
