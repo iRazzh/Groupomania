@@ -2,15 +2,11 @@
     <div class="posts">
         <h3>L'actualité de vos collègues</h3>
         <article class="post" v-for="post in posts" :key="post.id">
-            <div class="comments" v-for="comment in comments" :key="comment.id">
-                <div class="allPost">
-                    <div class="post-content"> {{ post.content }} </div>
-                    <div class="post-image"><img :src="post.image"></div>
-                </div>
-                <div class="allComments">
+                <div class="post-content"> {{ post.content }} </div>
+                <div class="post-image"><img :src="post.image"></div>
+                <div class="comments" v-for="comment in comments" :key="comment.id">
                     <div class="comment-content"> {{comment.content}} </div>
                 </div>
-            </div>
         </article>      
     </div>
 </template>

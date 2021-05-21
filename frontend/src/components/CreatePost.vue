@@ -50,10 +50,10 @@ export default {
             })
             .then(res => 
             {
-                    if (res) 
-                    {
-                        window.location.reload()
-                    }
+                if (res) 
+                {
+                    window.location.reload()
+                }
             })
             .catch(error => 
             {

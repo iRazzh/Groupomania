@@ -22,18 +22,29 @@ export default {
 
     data() {
         return {
-            content: "",
+            comments: [],
+            userId: "",
         };
     },
 
     methods: {
         createComment: function()
         {
-            const formComment = document.getElementsByClassName("formComment")[0];
+            const content = document.getElementsByClassName("contentNewComment")[0].value;
+            console.log(content)
+            // const postId = parseInt(this.$route.params.id);
+            const userId = localStorage.getItem('userId')
+            console.log(userId)
+            const postId = parseInt(this.id_post);
+            console.log(postId)
             const token = localStorage.getItem("token");
-            console.log(formComment)
 
-            axios.post("http://localhost:3000/api/comment/" /* + userId/comment */, {
+            axios.post("http://localhost:3000/api/comment/" /* + idPost/comment */, 
+            {
+                content,
+                userId
+            },
+            {
                 headers: {
                     "Content-Type" : "application/json",
                     "Authorization": `Bearer ${token}`

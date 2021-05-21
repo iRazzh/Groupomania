@@ -8,7 +8,7 @@
         </header>
 
         <main >
-            <h2>Bonjour </h2>
+            <h2>Bonjour, </h2>
             <div class="userName"></div>
 
             <button class="delete" @click="deleteProfile">Supprimer le profil</button>
@@ -40,7 +40,7 @@ export default {
         deleteProfile() {
         const token = localStorage.getItem('token')
         const id = localStorage.getItem('userId')
-
+        
         axios.delete('http://localhost:3000/api/auth/delete/' + id, {
                 headers: {
                     "Content-Type" : "application/json",
