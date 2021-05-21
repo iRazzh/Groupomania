@@ -3,23 +3,23 @@
         <header class="header">
             <router-link to="/wall">
                 <img src="../assets/icon.png" alt="Logo de Groupomania">
-                <p>Votre mur</p>
             </router-link>
         </header>
     
         <div class="posts">
-            <h3>Vous avez choisi ce post</h3>
             <article class="post" v-if="post !== undefined">
                 <div class="post-content"> {{ post.content }} </div>
                 <div class="post-image"><img :src="post.image"></div>
-                <div class="comments" v-for="comment in comments" :key="comment">
-                    <div class="comment-content"> {{comment.content}} </div>
+                <div class="allComments">
+                    <h3 class="titleComments">Commentaires :</h3>
+                    <div class="comments" v-for="comment in comments" :key="comment">
+                        {{comment.content}} 
+                    </div>
                 </div>
             </article>      
         </div>
 
         <div class="createComments">
-            <h3>Commentaire</h3>
             <form class="formComment" @submit.prevent="createComment">
 
                 <div class="formNewComments">
@@ -125,14 +125,48 @@ export default {
 
 img{
     width: 18%;
+    border-radius: 10px;
 }
-p{
-    font-size: 20px;
-    margin: 0;
-    margin-bottom: 3rem;
+.searchOnePost{
+    text-align: center;
 }
-a{
-    text-decoration: none;
-    color: red;
+.posts{
+    text-align: center;
+    width: 65%;
+    margin: auto;
+}
+.post{
+    border: 1px solid black;
+    width: 90%;
+    margin: auto;
+    height: auto;
+    margin-bottom: 1rem;
+}
+.post-content{
+    background-color: rgba(209, 213, 219);
+    padding: 1rem 0;
+    margin-bottom: 10px;
+}
+.post-image{
+    margin-bottom: 10px;
+}
+.post-image img{
+    width: 50%;
+}
+.comments{
+    background-color: rgba(209, 213, 219);
+    border: 1px transparent black;
+    border-radius: 10px;
+    width: 88%;
+    margin: auto;
+    margin-bottom: 15px;
+    text-align: initial;
+    padding: 15px;
+}
+.titleComments{
+    width: 88%;
+    margin: auto;
+    text-align: initial;
+    padding: 15px;
 }
 </style>

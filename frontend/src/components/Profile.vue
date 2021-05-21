@@ -2,8 +2,7 @@
     <div class="profile">
         <header class="header">
             <router-link to="/wall">
-                <img src="../assets/icon.png" alt="Logo de Groupomania">
-                <p>Votre mur</p>
+                <img src="../assets/icon-above-font.png" alt="Logo de Groupomania">
             </router-link>
         </header>
 
@@ -69,17 +68,32 @@ export default {
 .header, main{
     text-align: center;
 }
-
 img{
-    width: 18%;
-}
-p{
-    font-size: 20px;
-    margin: 0;
-    margin-bottom: 3rem;
+    width: 25%;
+    margin-bottom: 2rem;
 }
 a{
     text-decoration: none;
-    color: red;
+    color: black;
+}
+h2{
+    margin-bottom: 3rem;
+}
+.userName{
+    border: 1px transparent black;
+    border-radius: 10px;
+    width: 50%;
+    margin: auto;
+    padding: 1rem;
+    margin-bottom: 6rem;
+    background: #F1F2F6;
+}
+.delete{
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    background: rgba(239, 68, 68);
+    font-weight: bold;
+    color: white;
 }
 </style>
