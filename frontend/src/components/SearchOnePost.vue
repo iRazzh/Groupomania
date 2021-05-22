@@ -9,14 +9,24 @@
     
         <div class="posts">
             <article class="post" v-if="post !== undefined">
-                <div class="post-content"> {{ post.content }} </div>
+                <div class="post-content" v-html="post.content"></div>
                 <div class="post-image"><img :src="post.image"></div>
+
+                    <label for="modify">Modifier le contenu du post : </label> <br>
+                    <textarea class="contentPost" name="modify" placeholder="Une modification ?" v-model="content"></textarea> <br>
+                    <button class="modifyPost" @click="modifyPost">Modifier</button>
+
                 <div class="allComments">
                     <h3 class="titleComments">Commentaires :</h3>
                     <div class="comments" v-for="comment in comments" :key="comment">
-                        {{comment.content}} 
+                        {{comment.content}}
+                        <div>
+                            <button class="deleteComment" @click="deleteComment(comment.id)">Supprimer</button>
+                        </div>
                     </div>
                 </div>
+
+                <button class="deletePost" @click="deletePost">Supprimer</button>
             </article>      
         </div>
 
@@ -25,7 +35,7 @@
 
                 <div class="formNewComments">
                     <label for="newComment">Un commentaire ?</label> <br>
-                    <textarea name="newComment" class="contentNewComment" placeholder="Un commentaire?" required v-model="content"></textarea> <br>
+                    <textarea name="newComment" class="contentNewComment" placeholder="Un commentaire?" required></textarea> <br>
                     <button type="submit">Commenter !</button>
                 </div>
             </form>
@@ -45,6 +55,7 @@ export default {
             post: [],
             comments: [],
             content: "",
+            modifyContent: "",
         }
     },
 
@@ -55,12 +66,11 @@ export default {
     },
 
     methods: {
-        getOnePost(){
 
-            const id = this.$route.params.id
-
+        getOnePost() {
+            const idPost = this.$route.params.id
             const token = localStorage.getItem("token")
-            axios.get("http://localhost:3000/api/post/" + id, {
+            axios.get("http://localhost:3000/api/post/" + idPost, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
@@ -69,9 +79,12 @@ export default {
             .then(res => {
                 this.post = res.data[0];
             })
+            .catch(error => {
+                console.log("Le post n'a pas pu être récupéré /" + error)
+            })
         },
-        createComment()
-        {
+
+        createComment() {
             const content = document.getElementsByClassName("contentNewComment")[0].value;
             const idPost = this.$route.params.id
             const token = localStorage.getItem("token");
@@ -93,7 +106,25 @@ export default {
                 window.location.reload()
             })
             .catch(error => {
-                console.log("Le commentaire n'a pas pu être crée " + error)
+                console.log("Le commentaire n'a pas pu être crée /" + error)
+            })
+        },
+
+        deleteComment(idComment) {
+            const token = localStorage.getItem('token')
+            axios.delete(`http://localhost:3000/api/comment/comment/${idComment}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(res => {
+                if (res) {
+                    window.location.reload()
+                }
+            })
+            .catch(error => {
+                console.log("Le commentaire n'a pas pu être supprimé /" + error)
             })
         },
 
@@ -109,9 +140,59 @@ export default {
                 this.comments = res.data;
             })
             .catch(error => {
-                console.log("L'accès à tous les commentaires n'a pas pu se faire " + error)
+                console.log("L'accès à tous les commentaires n'a pas pu se faire /" + error)
             })
         },
+
+        deletePost() {
+            const token = localStorage.getItem('token')
+            const idPost = this.$route.params.id
+            console.log(idPost)
+
+            axios.delete("http://localhost:3000/api/post/" + idPost, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(res => {
+
+                if (res) {
+                    this.$router.push('/wall'); 
+                }
+
+            })
+            .catch(error => {
+                console.log("Le post n'a pas pu être supprimé /" + error )
+            }) 
+        },
+
+        modifyPost() {
+            const idPost = this.$route.params.id;
+            const token = localStorage.getItem('token');
+            const content = document.getElementsByClassName("contentPost")[0].value;
+            console.log(content)
+
+            axios.put("http://localhost:3000/api/post/" + idPost, {
+                idPost,
+                content
+            },
+
+            {
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+            .then(res => {
+                if (res) {
+                    window.location.reload()
+                }
+            })
+            .catch(error => {
+                console.log("Le post n'a pas pu être modifié /" + error)
+            })
+        }
     }
 }
 </script>

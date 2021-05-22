@@ -41,7 +41,8 @@ exports.modifyPost = (req, res, next) => {
 
 // Supprimer un post
 exports.deletePost = (req, res, next) => {
-    db.query(`DELETE FROM post WHERE id = ?`, req.params.id, (error, result) => {
+    const id = req.params.id
+    db.query(`DELETE FROM post WHERE id = ?`, id, (error, result) => {
         if (error) {
             return res.status(400).json({ error: "Le post n'a pas pu être supprimé" })
         }
@@ -51,7 +52,8 @@ exports.deletePost = (req, res, next) => {
 
 // Accès à un post 
 exports.getOnePost =  (req, res, next) => {
-    db.query(`SELECT * FROM post WHERE id = ?`, req.params.id, (error, result) => {
+    const id = req.params.id
+    db.query(`SELECT * FROM post WHERE id = ?`, id, (error, result) => {
         return res.status(200).json(result);
     })
 }

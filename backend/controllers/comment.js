@@ -32,7 +32,8 @@ exports.modifyComment = (req, res, next) => {
 
 // Suppression d'un commentaire
 exports.deleteComment = (req, res, next) => {
-    db.query(`DELETE FROM comment WHERE id = ?` , req.params.id, (error, result) => {
+    const id = req.params.id
+    db.query(`DELETE FROM comment WHERE id = ?` , id, (error, result) => {
         if (error) {
             return res.status(400).json({ error: "Le commentaire n'a pas pu être supprimé" })
         }
