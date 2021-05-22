@@ -5,6 +5,7 @@
             <router-link :to="{ name: 'OnePost', params: {id: post.id} }">
                 <div class="post-content"> {{ post.content }} </div>
                 <div class="post-image"><img :src="post.image"></div>
+                <h3 class="titleComments">Commentaires :</h3>
                 <div class="comments" v-for="comment in comments" :key="comment">
                     <div class="comment-content"> {{comment.content}} </div>
                 </div>
