@@ -66,22 +66,28 @@ export default {
 
 
 <style scoped>
+h3{
+    margin: 4rem 0;
+}
 .posts{
     text-align: center;
     width: 65%;
     margin: auto;
 }
 .post{
-    border: 1px solid black;
+    border: 1px solid rgb(119, 119, 119);
+    border-radius: 25px;
     width: 90%;
     margin: auto;
     height: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 5rem;
 }
 .post-content{
-    background-color: rgba(209, 213, 219);
-    padding: 1rem 0;
+    background-color: #FFF;
+    padding: 3rem 1rem;
     margin-bottom: 10px;
+    text-align: initial;
+    border-radius: 25px 25px 0 0;
 }
 .post-image{
     margin-bottom: 10px;
@@ -90,7 +96,7 @@ export default {
     width: 45%;
 }
 .comments{
-    background-color: rgba(209, 213, 219);
+    background-color: #FFF;
     border: 1px transparent black;
     border-radius: 10px;
     width: 88%;

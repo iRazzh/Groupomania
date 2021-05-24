@@ -69,7 +69,7 @@ export default {
     text-align: center;
     border: 1px solid black;
     border-radius: 70px;
-    width: 40%;
+    width: 56%;
     margin: auto;
     padding: 1rem;
     margin-bottom: 2rem;
@@ -78,8 +78,19 @@ export default {
     margin: 2rem 0;
 }
 .contentNewPost{
-    padding: 2rem;
-    border: 1px solid black;
+    width: 65%;
+    padding: 1rem;
     border-radius: 10px;
+}
+button{
+    padding: 9px;
+    width: 12rem;
+    background-color: #FFF;
+    border-radius: 20px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: #b7ebbb;
+;
 }
 </style>

@@ -22,6 +22,7 @@ exports.signup = (req, res, next) => {
                 name: req.body.name,
                 email: req.body.email,
                 password: hash,
+                admin: 0,
             });
             db.query(`INSERT INTO user SET ?`, user, (error, result) => {
                 if (error) {
@@ -69,8 +70,9 @@ exports.login = (req, res, next) => {
                     }, process.env.TOKEN, 
                     { expiresIn: '24h' }
                 );
+                const admin = result[0].admin;
 
-                res.status(200).json({ token, userId:id, name:name});
+                res.status(200).json({ token, userId:id, name:name, admin:admin});
             });
         }
     });

@@ -3,7 +3,7 @@
 
         <header class="header">
             <router-link to="/wall">
-                <img src="../assets/icon.png" alt="Logo de Groupomania">
+                <img src="../assets/icon_modify.png" alt="Logo de Groupomania">
             </router-link>
         </header>
     
@@ -12,7 +12,7 @@
                 <div class="post-content" v-html="post.content"></div>
                 <div class="post-image"><img :src="post.image"></div>
 
-                    <label for="modify">Modifier le contenu du post : </label> <br>
+                    <label class="titleModify" for="modify">Modifier le contenu du post : </label> <br>
                     <textarea class="contentPost" name="modify" placeholder="Une modification ?" v-model="content"></textarea> <br>
                     <button class="modifyPost" @click="modifyPost">Modifier</button>
 
@@ -21,12 +21,12 @@
                     <div class="comments" v-for="comment in comments" :key="comment">
                         {{comment.content}}
                         <div>
-                            <button class="deleteComment" @click="deleteComment(comment.id)">Supprimer</button>
+                            <button class="deleteComment" @click="deleteComment(comment.id)"></button>
                         </div>
                     </div>
                 </div>
 
-                <button class="deletePost" @click="deletePost">Supprimer</button>
+                <button class="deletePost" @click="deletePost">Supprimer la publication</button>
             </article>      
         </div>
 
@@ -34,9 +34,9 @@
             <form class="formComment" @submit.prevent="createComment">
 
                 <div class="formNewComments">
-                    <label for="newComment">Un commentaire ?</label> <br>
+                    <label class="titleNewComment" for="newComment">Un commentaire ?</label> <br>
                     <textarea name="newComment" class="contentNewComment" placeholder="Un commentaire?" required></textarea> <br>
-                    <button type="submit">Commenter !</button>
+                    <button class="addComment" type="submit">Commenter</button>
                 </div>
             </form>
         </div>
@@ -198,8 +198,9 @@ export default {
 </script>
 
 <style scoped>
-.header, main{
+.header{
     text-align: center;
+    margin-bottom: 2rem;
 }
 
 img{
@@ -215,25 +216,28 @@ img{
     margin: auto;
 }
 .post{
-    border: 1px solid black;
+    border: 1px solid rgb(119, 119, 119);
+    border-radius: 25px;
     width: 90%;
     margin: auto;
     height: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 5rem;
 }
 .post-content{
-    background-color: rgba(209, 213, 219);
-    padding: 1rem 0;
+    background-color: #FFF;
+    padding: 3rem 1rem;
     margin-bottom: 10px;
+    text-align: initial;
+    border-radius: 25px 25px 0 0;
 }
 .post-image{
     margin-bottom: 10px;
 }
 .post-image img{
-    width: 50%;
+    width: 45%;
 }
 .comments{
-    background-color: rgba(209, 213, 219);
+    background-color: #FFF;
     border: 1px transparent black;
     border-radius: 10px;
     width: 88%;
@@ -241,11 +245,63 @@ img{
     margin-bottom: 15px;
     text-align: initial;
     padding: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 .titleComments{
-    width: 88%;
+    width: 90%;
     margin: auto;
     text-align: initial;
     padding: 15px;
+}
+.deleteComment{
+    padding: 7px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.deleteComment:hover{
+    background-color: rgba(239, 68, 68);
+}
+.titleModify, .contentPost{
+    margin-bottom: 15px;
+}
+.contentPost{
+    padding: 26px;
+    margin-top: 15px;
+    border-radius: 19px;
+}
+.modifyPost, .addComment{
+    padding: 6px;
+    width: 20%;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.modifyPost:hover, .addComment:hover{
+    background-color: #b7ebbb;
+}
+.deletePost{
+    margin-bottom: 1rem;
+    padding: 7px;
+    background: rgba(239, 68, 68);
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+}
+.titleModify, .titleNewComment{
+    font-weight: bold;
+}
+.formNewComments{
+    border: 1px solid rgb(119, 119, 119);
+    border-radius: 10px;
+    width: 35%;
+    margin: auto;
+    margin-bottom: 2rem;
+    padding: 1rem;
+}
+.contentNewComment{
+    margin: 1rem 0;
+    padding: 26px;
+    border-radius: 19px;
 }
 </style>

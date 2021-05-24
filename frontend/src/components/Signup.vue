@@ -109,29 +109,35 @@ form {
   margin: 1rem 0;
 }
 .formSignup {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 input {
   margin: 1rem 0;
-  padding: 5px;
+  padding: 7px;
+  border-radius: 6px;
 }
 .wantLogin {
   text-align: center;
   margin: auto;
-  border: 1px solid black;
+  border: 1px transparent black;
   border-radius: 10px;
   width: 15%;
   padding: 10px;
-  box-shadow: 0.3rem 0.5rem 0.5rem black;
+  background-color: #ff6961;
 }
 .btnSignup {
     text-decoration: none;
     color: black;
     border: 1px black transparent;
     border-radius: 10px;
-    padding: 1rem;
-    background: rgb(175, 175, 175);
-    margin-bottom: 3rem;
+    padding: 12px;
+    background: #FFF;
+    cursor: pointer;
+    margin-bottom: 4rem;
+    width: 12rem;
+}
+.btnSignup:hover{
+  background-color: #b7ebbb;
 }
 .loginNav{
     text-decoration: none;

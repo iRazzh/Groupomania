@@ -75,6 +75,7 @@ export default {
           localStorage.setItem("token", (res.data.token))
           localStorage.setItem("userId", (res.data.userId))
           localStorage.setItem("name", (res.data.name))
+          localStorage.setItem("admin", (res.data.admin))
         }
         this.$router.push('/wall');
       })
@@ -88,37 +89,47 @@ export default {
 </script>
 
 <style scoped>
+body{
+  background-color: #B0E0E6;
+}
+
 .loginForm {
   margin-bottom: 2rem;
 }
 form {
   text-align: center;
-  margin: 1rem 0;
+  margin-bottom: 4rem;
 }
 .formLogin {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 input {
   margin: 1rem 0;
-  padding: 5px;
+  padding: 7px;
+  border-radius: 6px;
 }
 .wantSignup {
   text-align: center;
   margin: auto;
-  border: 1px solid black;
+  border: 1px transparent black;
   border-radius: 10px;
   width: 15%;
   padding: 10px;
-  box-shadow: 0.3rem 0.5rem 0.5rem black;
+  background-color: #ff6961;
 }
 .btnLogin{
     text-decoration: none;
     color: black;
-    border: 1px black transparent;
+    border: 1px white transparent;
     border-radius: 10px;
-    padding: 1rem;
-    background: rgb(175, 175, 175);
-    margin-bottom: 3rem;
+    padding: 12px;
+    background: #FFF;
+    cursor: pointer;
+    margin-bottom: 4rem;
+    width: 12rem;
+}
+.btnLogin:hover{
+    background-color: #b7ebbb;
 }
 .signupNav{
     text-decoration: none;

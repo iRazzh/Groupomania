@@ -20,16 +20,6 @@ exports.createComment = (req, res, next) => {
     })
 }
 
-// Modification d'un commentaire 
-exports.modifyComment = (req, res, next) => {
-    db.query(`UPDATE comment SET content = ? WHERE id = ?`, [req.body.content, req.params.id], (error, result) => {
-        if (error) {
-            return res.status(400).json({ error: "Le commentaire n'a pas pu être modifié" })
-        }
-        return res.status(200).json(result);
-    })
-}
-
 // Suppression d'un commentaire
 exports.deleteComment = (req, res, next) => {
     const id = req.params.id

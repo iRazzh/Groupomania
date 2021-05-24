@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <img src="../assets/icon.png" alt="Logo de Groupomania">
+        <img src="../assets/icon_modify.png" alt="Logo de Groupomania">
         <router-link to="/profile">
             <p>Votre profil</p>
         </router-link>
@@ -20,6 +20,7 @@ export default {
 
 img{
     width: 18%;
+    margin-bottom: 1rem;
 }
 p{
     font-size: 20px;

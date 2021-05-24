@@ -2,7 +2,7 @@
     <div class="profile">
         <header class="header">
             <router-link to="/wall">
-                <img src="../assets/icon-above-font.png" alt="Logo de Groupomania">
+                <img src="../assets/icon-left-font_modify.png" alt="Logo de Groupomania">
             </router-link>
         </header>
 
@@ -68,8 +68,8 @@ export default {
     text-align: center;
 }
 img{
-    width: 25%;
-    margin-bottom: 2rem;
+    width: 20%;
+    margin-bottom: 1rem;
 }
 a{
     text-decoration: none;
@@ -81,7 +81,7 @@ h2{
 .userName{
     border: 1px transparent black;
     border-radius: 10px;
-    width: 50%;
+    width: 30%;
     margin: auto;
     padding: 1rem;
     margin-bottom: 6rem;
@@ -90,9 +90,10 @@ h2{
 .delete{
     border-radius: 10px;
     padding: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 10rem;
     background: rgba(239, 68, 68);
     font-weight: bold;
     color: white;
+    cursor: pointer;
 }
 </style>
