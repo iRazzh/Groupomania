@@ -4,13 +4,24 @@
         <router-link to="/profile">
             <p>Votre profil</p>
         </router-link>
+        <router-link to="/home">
+            <button class="disconnect" @click="disconnect">Se déconnecter</button>
+        </router-link>
     </div>
 </template>
 
 <script>
 export default {
     name: 'HeaderLogged',
+
+    methods: {
+        disconnect() {
+            localStorage.clear()
+        }
     }
+}
+
+    
 </script>
 
 <style scoped>
@@ -25,7 +36,12 @@ img{
 p{
     font-size: 20px;
     margin: 0;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+}
+.disconnect{
+    font-weight: initial;
+    font-size: 15px;
+    margin-bottom: 2rem;
 }
 a{
     text-decoration: none;

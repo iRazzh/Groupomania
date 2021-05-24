@@ -72,10 +72,10 @@ export default {
       )
       .then((res) => {
         {
-          localStorage.setItem("token", (res.data.token))
-          localStorage.setItem("userId", (res.data.userId))
-          localStorage.setItem("name", (res.data.name))
-          localStorage.setItem("admin", (res.data.admin))
+          localStorage.setItem("token", (res.data.token));
+          localStorage.setItem("userId", (res.data.userId));
+          localStorage.setItem("name", (res.data.name));
+          localStorage.setItem("admin", (res.data.admin));
         }
         this.$router.push('/wall');
       })
