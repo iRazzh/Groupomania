@@ -2,15 +2,19 @@
     <div class="posts">
         <h3>L'actualité de vos collègues</h3>
         <article class="post" v-for="post in posts" :key="post">
-            <router-link :to="{ name: 'OnePost', params: {id: post.id} }">
+            <router-link :to="{ name: 'OnePost', params: { id: post.id }}">
+
+                <div class="post-name"> Publié par <strong>{{ post.name }}</strong> le {{ datePost(post.date) }}</div>
                 <div class="post-content"> {{ post.content }} </div>
                 <div class="post-image"><img :src="post.image"></div>
                 <h3 class="titleComments">Commentaires :</h3>
+                
                 <div class="comments" v-for="comment in comments" :key="comment">
-                    <div class="comment-content"> {{comment.content}} </div>
+                    <div class="comment-content"> {{ comment.content }} </div>
                 </div>
             </router-link>
         </article>
+        
     </div>
 </template>
 
@@ -59,6 +63,12 @@ export default {
                 this.comments = res.data;
             })
         },
+        datePost(date){
+            const event = new Date(date);
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+
+            return event.toLocaleDateString('fr-Fr', options);
+        }
     }
 }
 
@@ -71,35 +81,41 @@ h3{
 }
 .posts{
     text-align: center;
-    width: 65%;
+    width: 80%;
     margin: auto;
 }
 .post{
     border: 1px solid rgb(119, 119, 119);
     border-radius: 25px;
-    width: 90%;
+    width: 100%;
     margin: auto;
     height: auto;
     margin-bottom: 5rem;
+}
+.post-name{
+    background-color: #FFF;
+    border-radius: 25px 25px 0 0;
+    padding: 1rem;
+    border-bottom: 1px solid rgb(119, 119, 119);
+    font-style: italic;
 }
 .post-content{
     background-color: #FFF;
     padding: 3rem 1rem;
     margin-bottom: 10px;
     text-align: initial;
-    border-radius: 25px 25px 0 0;
 }
 .post-image{
     margin-bottom: 10px;
 }
 .post-image img{
-    width: 45%;
+    width: 90%;
 }
 .comments{
     background-color: #FFF;
     border: 1px transparent black;
     border-radius: 10px;
-    width: 88%;
+    width: 70%;
     margin: auto;
     margin-bottom: 15px;
     text-align: initial;
@@ -119,4 +135,25 @@ a{
     color: black;
 }
 
+@media screen and (min-width: 426px) {
+    .posts{
+        width: 65%;
+    }
+    .comments{
+        width: 85%;
+    }
+}
+@media screen and (min-width: 769px) {
+    .post-image img{
+        width: 75%;
+    }
+}
+@media screen and (min-width: 1025px) {
+    .posts{
+        width: 45%;
+    }
+    .post-image img{
+        width: 60%;
+    }
+}
 </style>

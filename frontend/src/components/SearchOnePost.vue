@@ -9,24 +9,27 @@
     
         <div class="posts">
             <article class="post" v-if="post !== undefined">
+
                 <div class="post-content" v-html="post.content"></div>
                 <div class="post-image"><img :src="post.image"></div>
-
+                    
                     <label class="titleModify" for="modify">Modifier le contenu du post : </label> <br>
-                    <textarea class="contentPost" name="modify" placeholder="Une modification ?" v-model="content"></textarea> <br>
-                    <button class="modifyPost" @click="modifyPost">Modifier</button>
+                    <textarea class="contentPost" name="modify" placeholder="Une modification ?" v-model="content" ></textarea> <br>
+                    <button class="modifyPost" @click="modifyPost" v-if="content !== ''">Modifier</button>
 
                 <div class="allComments">
+
                     <h3 class="titleComments">Commentaires :</h3>
                     <div class="comments" v-for="comment in comments" :key="comment">
-                        {{comment.content}}
-                        <div>
-                            <button class="deleteComment" @click="deleteComment(comment.id)"></button>
-                        </div>
+                        <div class="comment-content"> {{ comment.content }} </div>
+                        <div class="comment-name"> {{ comment.name }} le {{ comment.date_creation }} </div>
+                        <div><button class="deleteComment" @click="deleteComment(comment.id)"></button></div>
                     </div>
+
                 </div>
 
                 <button class="deletePost" @click="deletePost">Supprimer la publication</button>
+
             </article>      
         </div>
 
@@ -56,6 +59,7 @@ export default {
             comments: [],
             content: "",
             modifyContent: "",
+            name: "",
         }
     },
 
@@ -168,16 +172,18 @@ export default {
         },
 
         modifyPost() {
+            
             const idPost = this.$route.params.id;
+            const idBdd = this.$user.id_user;
             const token = localStorage.getItem('token');
             const content = document.getElementsByClassName("contentPost")[0].value;
-            console.log(content)
-
+            const userId = localStorage.getItem('userId')
+            if (userId === idBdd)
             axios.put("http://localhost:3000/api/post/" + idPost, {
                 idPost,
                 content
             },
-
+    
             {
                 headers: {
                     "Content-Type" : "application/json",
@@ -195,6 +201,7 @@ export default {
         }
     }
 }
+
 </script>
 
 <style scoped>
@@ -204,7 +211,7 @@ export default {
 }
 
 img{
-    width: 18%;
+    width: 35%;
     border-radius: 10px;
 }
 .searchOnePost{
@@ -212,7 +219,7 @@ img{
 }
 .posts{
     text-align: center;
-    width: 65%;
+    width: 90%;
     margin: auto;
 }
 .post{
@@ -234,13 +241,13 @@ img{
     margin-bottom: 10px;
 }
 .post-image img{
-    width: 45%;
+    width: 90%;
 }
 .comments{
     background-color: #FFF;
     border: 1px transparent black;
     border-radius: 10px;
-    width: 88%;
+    width: 80%;
     margin: auto;
     margin-bottom: 15px;
     text-align: initial;
@@ -273,7 +280,7 @@ img{
 }
 .modifyPost, .addComment{
     padding: 6px;
-    width: 20%;
+    width: 60%;
     border-radius: 15px;
     cursor: pointer;
 }
@@ -294,7 +301,7 @@ img{
 .formNewComments{
     border: 1px solid rgb(119, 119, 119);
     border-radius: 10px;
-    width: 35%;
+    width: 75%;
     margin: auto;
     margin-bottom: 2rem;
     padding: 1rem;
@@ -303,5 +310,42 @@ img{
     margin: 1rem 0;
     padding: 26px;
     border-radius: 19px;
+}
+
+@media screen and (min-width: 426px) {
+    img{
+        width: 30%;
+    }
+    .modifyPost, .addComment{
+        width: 35%;
+    }
+}
+@media screen and (min-width: 769px) {
+    img{
+        width: 25%;
+    }
+    .posts{
+        width: 60%;
+    }
+    .formNewComments{
+        width: 50%;
+    }
+    .modifyPost, .addComment{
+        width: 35%;
+    }
+}
+@media screen and (min-width: 1025px) {
+    img{
+        width: 15%;
+    }
+    .posts{
+        width: 45%;
+    }
+    .formNewComments{
+        width: 39%;
+    }
+    .modifyPost, .addComment{
+        width: 27%;
+    }
 }
 </style>

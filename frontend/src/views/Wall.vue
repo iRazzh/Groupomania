@@ -1,12 +1,12 @@
 <template>
-    <div class="wall">
+      <div class="wall">
 
-        <HeaderLogged />
-        <CreatePost />
-        <AllPosts />
-        <Footer />
-        
-    </div>
+          <HeaderLogged />
+          <CreatePost />
+          <AllPosts />
+          <Footer />
+          
+      </div>
 </template>
 
 <script>

@@ -4,8 +4,8 @@ const Post = require('../models/Post');
 
 // Création d'un post
 exports.createPost = (req, res, next) => {    
-    console.log(req.body)
     date = new Date();
+    
     let image = "";
     
     if (req.file) {

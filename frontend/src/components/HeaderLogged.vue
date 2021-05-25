@@ -30,7 +30,7 @@ export default {
 }
 
 img{
-    width: 18%;
+    width: 35%;
     margin-bottom: 1rem;
 }
 p{
@@ -42,10 +42,34 @@ p{
     font-weight: initial;
     font-size: 15px;
     margin-bottom: 2rem;
+    padding: 9px;
+    width: 12rem;
+    background-color: #FFF;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.disconnect:hover{
+    background-color: #b7ebbb;
 }
 a{
     text-decoration: none;
     color: black;
     font-weight: bold;
+}
+
+@media screen and (min-width: 426px) {
+    img{
+        width: 30%;
+    }
+}
+@media screen and (min-width: 769px) {
+    img {
+        width: 25%;
+    }
+}
+@media screen and (min-width: 1025px) {
+    img {
+        width: 15%;
+    }
 }
 </style>

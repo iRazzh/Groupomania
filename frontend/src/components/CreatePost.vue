@@ -69,7 +69,7 @@ export default {
     text-align: center;
     border: 1px solid black;
     border-radius: 70px;
-    width: 56%;
+    width: 75%;
     margin: auto;
     padding: 1rem;
     margin-bottom: 2rem;
@@ -92,5 +92,21 @@ button{
 button:hover{
     background-color: #b7ebbb;
 ;
+}
+
+@media screen and (min-width: 426px) {
+    .createPost{
+        width: 60%;
+    }
+}
+@media screen and (min-width: 769px) {
+    .createPost{
+        width: 50%;
+    }
+}
+@media screen and (min-width: 1025px) {
+    .createPost{
+        width: 40%;
+    }
 }
 </style>

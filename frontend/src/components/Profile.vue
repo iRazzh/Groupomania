@@ -68,7 +68,7 @@ export default {
     text-align: center;
 }
 img{
-    width: 20%;
+    width: 85%;
     margin-bottom: 1rem;
 }
 a{
@@ -95,5 +95,15 @@ h2{
     font-weight: bold;
     color: white;
     cursor: pointer;
+}
+@media screen and (min-width: 426px) {
+    img {
+        width: 40%;
+    }
+}
+@media screen and (min-width: 1025px) {
+    img {
+        width: 25%;
+    }
 }
 </style>

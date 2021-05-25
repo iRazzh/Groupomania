@@ -1,8 +1,8 @@
-const User = require('../models/User');
+const User = require("../models/User");
 const bcrypt = require("bcrypt"); // Utilisation de "bcrypt" pour hasher le mdp
-const jwt = require('jsonwebtoken'); // Utilisation de "jsonwebtoken" pour attribuer un token lors de la connexion
-const db = require('../sqlBDD');
-require('dotenv').config() // Masquage des infos importantes dans le fichier .env
+const jwt = require("jsonwebtoken"); // Utilisation de "jsonwebtoken" pour attribuer un token lors de la connexion
+const db = require("../sqlBDD");
+require("dotenv").config(); // Masquage des infos importantes dans le fichier .env
 
 // Inscription d'un utilisateur
 exports.signup = (req, res, next) => {
@@ -39,52 +39,48 @@ exports.signup = (req, res, next) => {
     }
 };
 
-// Connexion d'un utilisateur 
+// Connexion d'un utilisateur
 exports.login = (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  let sql = `SELECT * FROM user WHERE email = ?`;
 
-    const email = req.body.email;
-    const password = req.body.password;
-    let sql = `SELECT * FROM user WHERE email = ?`;
-
-    db.query(sql, email, (error, result) => {
-
-        if(result === "" || result == undefined)
-        {
-            return res.status(401).json({ error : "Utilisateur introuvable" })
-        } 
-        else 
-        {
-            bcrypt.compare(password, result[0].password)
-            .then(valid => {
-                
-                if(!valid) {
-                    return res.status(401).json({ error : "Mot de passe incorrect" });
-                }
-                const id = result[0].id_user
-                const name = result[0].name
-                const token = jwt.sign(
-                    {
-                        userId: id,
-                        adminRank: result[0].admin,
-                        name: name,
-                    }, process.env.TOKEN, 
-                    { expiresIn: '24h' }
-                );
-                const admin = result[0].admin;
-
-                res.status(200).json({ token, userId:id, name:name, admin:admin});
-            });
+  db.query(sql, email, (error, result) => {
+    if (result === "" || result == undefined) {
+      return res.status(401).json({ error: "Utilisateur introuvable" });
+    } else {
+      bcrypt.compare(password, result[0].password).then((valid) => {
+        if (!valid) {
+          return res.status(401).json({ error: "Mot de passe incorrect" });
         }
-    });
+        const id = result[0].id_user;
+        const name = result[0].name;
+        const token = jwt.sign(
+          {
+            userId: id,
+            adminRank: result[0].admin,
+            name: name,
+          },
+          process.env.TOKEN,
+          { expiresIn: "24h" }
+        );
+        const admin = result[0].admin;
+
+        res.status(200).json({ token, userId: id, name: name, admin: admin });
+      });
+    }
+  });
 };
 
 // Supprime le compte d'un utilisateur
 exports.delete = (req, res, next) => {
-    const id = req.params.id
-    db.query(`DELETE FROM user WHERE id_user = ?` , id, (error, result) => {
-        if (error) {
-            return res.status(400).json({ error : "L'utilisateur n'a pas pu être supprimé"})
-        }
-        return res.status(200).json(result);
-    });  
+  const id = req.params.id;
+  db.query(`DELETE FROM user WHERE id_user = ?`, id, (error, result) => {
+    if (error) {
+      return res
+        .status(400)
+        .json({ error: "L'utilisateur n'a pas pu être supprimé" });
+    }
+    return res.status(200).json(result);
+  });
 };

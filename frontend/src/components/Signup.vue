@@ -4,7 +4,7 @@
     <form @submit.prevent = signup()>
       <div class="formSignup">
         <label>Nom :</label> <br />
-        <input class="nameSignup" type="text" placeholder="Marc DUPONT" required />
+        <input class="nameSignup" type="text" placeholder="Marc Dupont" required />
         <br />
       </div>
 
@@ -19,7 +19,7 @@
         <input
           class="passwordSignup"
           type="password"
-          placeholder="Mot de passe"
+          placeholder="Exemple00"
           required
         />
         <br />
@@ -30,7 +30,7 @@
         <input
           class="verifPasswordSignup"
           type="password"
-          placeholder="Mot de passe"
+          placeholder="Exemple00"
           required
         />
         <br />
@@ -86,10 +86,12 @@ export default {
             }
         )
         .then(() => {
+            alert("Félicitation ! Vous venez de vous inscrire !")
             this.$router.push('/login')
             }) 
 
-        .catch((error) => {console.log("Problème lors de l'identhification!" + error);
+        .catch(() => {
+          document.getElementsByClassName("errorSignup")[0].innerHTML = "Votre nom ou votre email ou votre mot de passe est incorrect. Merci de respecter le format inscrit en exemple"
           });
       } else if (password !== password_confirmation) {
           alert("Les mots de passe ne sont pas identiques");
@@ -121,7 +123,7 @@ input {
   margin: auto;
   border: 1px transparent black;
   border-radius: 10px;
-  width: 15%;
+  width: 25%;
   padding: 10px;
   background-color: #ff6961;
 }
@@ -142,5 +144,20 @@ input {
 .loginNav{
     text-decoration: none;
     color: black;
+}
+.errorSignup{
+  color: #ff6961;
+  margin-bottom: 3rem;
+}
+
+@media screen and (min-width: 769px) {
+    .wantLogin {
+        width: 20%;
+    }
+}
+@media screen and (min-width: 1025px) {
+    .wantLogin {
+        width: 15%;
+    }
 }
 </style>

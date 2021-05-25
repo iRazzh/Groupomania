@@ -58,7 +58,7 @@ export default {
 
       const email = this.email;
       const password = this.password;
-
+    
       axios.post("http://localhost:3000/api/auth/login",
             {
               email,
@@ -79,8 +79,8 @@ export default {
         }
         this.$router.push('/wall');
       })
-      .catch((error) => {
-        console.log("Problème lors de l'identhification!" + error);
+      .catch(() => {
+        document.getElementsByClassName("errorLogin")[0].innerHTML = "Votre email ou votre mot de passe n'est pas correct"
       });
 
     },
@@ -113,7 +113,7 @@ input {
   margin: auto;
   border: 1px transparent black;
   border-radius: 10px;
-  width: 15%;
+  width: 25%;
   padding: 10px;
   background-color: #ff6961;
 }
@@ -134,5 +134,19 @@ input {
 .signupNav{
     text-decoration: none;
     color: black;
+}
+.errorLogin{
+    color: #ff6961;
+}
+
+@media screen and (min-width: 769px) {
+    .wantSignup {
+        width: 20%;
+    }
+}
+@media screen and (min-width: 1025px) {
+    .wantSignup {
+        width: 15%;
+    }
 }
 </style>

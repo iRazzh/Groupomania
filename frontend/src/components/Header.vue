@@ -17,11 +17,26 @@ export default {
 }
 
 img{
-    width: 18%;
+    width: 65%;
 }
 p{
     font-size: 20px;
-    margin: 0;
-    margin-bottom: 3rem;
+    margin: 0 1rem 3rem;
+
+}
+@media screen and (min-width: 426px) {
+    img{
+        width: 48%;
+    }
+}
+@media screen and (min-width: 769px) {
+    img {
+        width: 35%;
+    }
+}
+@media screen and (min-width: 1025px) {
+    img {
+        width: 25%;
+    }
 }
 </style>
