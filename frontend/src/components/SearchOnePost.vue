@@ -65,8 +65,6 @@ export default {
 
     mounted() {
         this.getOnePost();
-        this.getAllComments();
-
     },
 
     methods: {
@@ -81,7 +79,9 @@ export default {
                 }
             })
             .then(res => {
-                this.post = res.data[0];
+                console.log(res.data)
+                this.post = res.data.post;
+                this.comments = res.data.comments;
             })
             .catch(error => {
                 console.log("Le post n'a pas pu être récupéré /" + error)
@@ -129,22 +129,6 @@ export default {
             })
             .catch(error => {
                 console.log("Le commentaire n'a pas pu être supprimé /" + error)
-            })
-        },
-
-        getAllComments() {
-            const token = localStorage.getItem("token")
-            axios.get("http://localhost:3000/api/comment/all", {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(res => {
-                this.comments = res.data;
-            })
-            .catch(error => {
-                console.log("L'accès à tous les commentaires n'a pas pu se faire /" + error)
             })
         },
 

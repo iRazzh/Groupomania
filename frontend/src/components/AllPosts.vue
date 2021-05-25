@@ -1,15 +1,16 @@
 <template>
     <div class="posts">
         <h3>L'actualité de vos collègues</h3>
+
         <article class="post" v-for="post in posts" :key="post">
-            <router-link :to="{ name: 'OnePost', params: { id: post.id }}">
+            <router-link :to=" { name: 'OnePost', params: { id: post.id }} ">
 
                 <div class="post-name"> Publié par <strong>{{ post.name }}</strong> le {{ datePost(post.date) }}</div>
                 <div class="post-content"> {{ post.content }} </div>
                 <div class="post-image"><img :src="post.image"></div>
                 <h3 class="titleComments">Commentaires :</h3>
                 
-                <div class="comments" v-for="comment in comments" :key="comment">
+                <div class="comments" v-for="comment in post.comments" :key="comment">
                     <div class="comment-content"> {{ comment.content }} </div>
                 </div>
             </router-link>
@@ -29,13 +30,11 @@ export default {
     data() {
         return {
             posts: [],
-            comments: [],
         }
     },
 
     mounted() {
             this.getAllPost();
-            this.getAllComments();
     },
 
     methods: {
@@ -49,18 +48,6 @@ export default {
             })
             .then(res => {
                 this.posts = res.data;
-            })
-        },
-        getAllComments() {
-            const token = localStorage.getItem("token")
-            axios.get("http://localhost:3000/api/comment/all", {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            .then(res => {
-                this.comments = res.data;
             })
         },
         datePost(date){

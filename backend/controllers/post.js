@@ -51,20 +51,44 @@ exports.deletePost = (req, res, next) => {
 }
 
 // Accès à un post 
-exports.getOnePost =  (req, res, next) => {
+exports.getOnePost = (req, res, next) => {
     const id = req.params.id
+    const Data = {}
+    db.query(`SELECT * FROM comment WHERE id_post = ?`, id, (error, result) => {
+        Data.comments = result
+    })
     db.query(`SELECT * FROM post WHERE id = ?`, id, (error, result) => {
-        return res.status(200).json(result);
+        Data.post = result[0]
+        return res.status(200).json(Data);
     })
 }
 
 // Accès à tous les posts
 exports.getAllPost = (req, res, next) => {
+    let allComments = []
+    let allPosts = []
+
+    db.query(`SELECT * FROM comment`, (error, result) => {
+        if (error) {
+            return res.status(400).json({ error: "Vous ne pouvez pas accéder à tous les commentaires" })
+        }
+        result.forEach(element => {
+            if (allComments[element.id_post] == undefined) {
+                allComments[element.id_post] = []
+            }
+            allComments[element.id_post].push(element)
+        })
+    })
+
     db.query(`SELECT id, post.id_user, content, image, date, status, name FROM post INNER JOIN user ON user.id_user = post.id_user ORDER BY date DESC`, (error, result) => {
         if (error) {
             return res.status(400).json({ error: "Vous ne pouvez pas accéder à tous les posts" })
         }
-        return res.status(200).json(result);
+        result.forEach(element => {
+            element.comments = allComments[element.id]
+            allPosts.push(element)
+        })
+        return res.status(200).json( allPosts );
     })
 }
 
