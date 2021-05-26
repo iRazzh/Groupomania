@@ -19,6 +19,7 @@ exports.createPost = (req, res, next) => {
         date: date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay(),
         status: 1
     });
+    console.log(date)
 
     db.query(`INSERT INTO post SET ?`, post, (error, result) => {
         if(error) {
@@ -54,10 +55,10 @@ exports.deletePost = (req, res, next) => {
 exports.getOnePost = (req, res, next) => {
     const id = req.params.id
     const Data = {}
-    db.query(`SELECT * FROM comment WHERE id_post = ?`, id, (error, result) => {
+    db.query(`SELECT comment.*, user.name FROM comment INNER JOIN user ON user.id_user = comment.id_user WHERE id_post = ?`, id, (error, result) => {
         Data.comments = result
     })
-    db.query(`SELECT * FROM post WHERE id = ?`, id, (error, result) => {
+    db.query(`SELECT post.*, user.name FROM post INNER JOIN user ON user.id_user = post.id_user WHERE id = ?`, id, (error, result) => {
         Data.post = result[0]
         return res.status(200).json(Data);
     })
@@ -68,7 +69,7 @@ exports.getAllPost = (req, res, next) => {
     let allComments = []
     let allPosts = []
 
-    db.query(`SELECT * FROM comment`, (error, result) => {
+    db.query(`SELECT comment.*, user.name FROM comment INNER JOIN user ON user.id_user = comment.id_user`, (error, result) => {
         if (error) {
             return res.status(400).json({ error: "Vous ne pouvez pas accéder à tous les commentaires" })
         }

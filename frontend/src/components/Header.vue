@@ -36,7 +36,7 @@ p{
 }
 @media screen and (min-width: 1025px) {
     img {
-        width: 25%;
+        width: 22%;
     }
 }
 </style>

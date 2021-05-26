@@ -9,7 +9,8 @@
     
         <div class="posts">
             <article class="post" v-if="post !== undefined">
-
+                
+                <div class="post-name"> Publié par <strong>{{ post.name }}</strong> - {{ datePost(post.date) }}</div>
                 <div class="post-content" v-html="post.content"></div>
                 <div class="post-image"><img :src="post.image"></div>
                     
@@ -22,8 +23,8 @@
                     <h3 class="titleComments">Commentaires :</h3>
                     <div class="comments" v-for="comment in comments" :key="comment">
                         <div class="comment-content"> {{ comment.content }} </div>
-                        <div class="comment-name"> {{ comment.name }} le {{ comment.date_creation }} </div>
                         <div><button class="deleteComment" @click="deleteComment(comment.id)"></button></div>
+                        <div class="comment-name"> <strong>{{ comment.name }}</strong> le {{ datePost(comment.date_creation) }} </div>
                     </div>
 
                 </div>
@@ -182,6 +183,13 @@ export default {
             .catch(error => {
                 console.log("Le post n'a pas pu être modifié /" + error)
             })
+        },
+
+        datePost(date){
+            const event = new Date(date);
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+
+            return event.toLocaleDateString('fr-Fr', options);
         }
     }
 }
@@ -214,12 +222,18 @@ img{
     height: auto;
     margin-bottom: 5rem;
 }
+.post-name{
+    background-color: #FFF;
+    border-radius: 25px 25px 0 0;
+    padding: 1rem;
+    border-bottom: 1px solid rgb(119, 119, 119);
+    font-style: italic;
+}
 .post-content{
     background-color: #FFF;
     padding: 3rem 1rem;
     margin-bottom: 10px;
     text-align: initial;
-    border-radius: 25px 25px 0 0;
 }
 .post-image{
     margin-bottom: 10px;
@@ -228,6 +242,8 @@ img{
     width: 90%;
 }
 .comments{
+    display: flex;
+    flex-wrap: wrap;
     background-color: #FFF;
     border: 1px transparent black;
     border-radius: 10px;
@@ -238,6 +254,14 @@ img{
     padding: 15px;
     display: flex;
     justify-content: space-between;
+}
+.comment-content{
+    width: 90%;
+    margin-bottom: 10px;
+}
+.comment-name{
+    font-size: 12px;
+    font-style: italic;
 }
 .titleComments{
     width: 90%;

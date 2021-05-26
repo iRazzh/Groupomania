@@ -5,13 +5,14 @@
         <article class="post" v-for="post in posts" :key="post">
             <router-link :to=" { name: 'OnePost', params: { id: post.id }} ">
 
-                <div class="post-name"> Publié par <strong>{{ post.name }}</strong> le {{ datePost(post.date) }}</div>
+                <div class="post-name"> Publié par <strong>{{ post.name }}</strong> - {{ datePost(post.date) }}</div>
                 <div class="post-content"> {{ post.content }} </div>
                 <div class="post-image"><img :src="post.image"></div>
                 <h3 class="titleComments">Commentaires :</h3>
                 
                 <div class="comments" v-for="comment in post.comments" :key="comment">
                     <div class="comment-content"> {{ comment.content }} </div>
+                    <div class="comment-name"> <strong>{{ comment.name }}</strong> - {{ datePost(comment.date_creation) }} </div>
                 </div>
             </router-link>
         </article>
@@ -107,6 +108,13 @@ h3{
     margin-bottom: 15px;
     text-align: initial;
     padding: 15px;
+}
+.comment-content{
+    margin-bottom: 10px;
+}
+.comment-name{
+    font-size: 12px;
+    font-style: italic;
 }
 .titleComments{
     width: 88%;

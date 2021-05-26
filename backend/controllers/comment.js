@@ -30,13 +30,3 @@ exports.deleteComment = (req, res, next) => {
         return res.status(200).json(result);
     })
 }
-
-// Accès à tous les commentaires
-exports.getAllComments = (req, res, next) => {
-    db.query(`SELECT id, comment.id_user, comment.id_post, content, date_creation, status FROM comment INNER JOIN user ON user.id_user = comment.id_user`, (error, result) => {
-        if (error) {
-            return res.status(400).json({ error: "Vous ne pouvez pas accéder à tous les commentaires" })
-        }
-        return res.status(200).json(result);
-    })
-}

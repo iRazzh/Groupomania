@@ -11,7 +11,5 @@ const commentCtrl = require('../controllers/comment');
 router.post('/:id/comment', auth, commentCtrl.createComment);
 // Router de la suppression d'un commentaire
 router.delete('/comment/:id', auth, commentCtrl.deleteComment);
-// Router de l'accès à tous les commentaires
-router.get('/all', auth, commentCtrl.getAllComments);
 
 module.exports = router;
