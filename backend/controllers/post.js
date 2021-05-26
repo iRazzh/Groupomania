@@ -5,7 +5,8 @@ const Post = require('../models/Post');
 // Création d'un post
 exports.createPost = (req, res, next) => {    
     date = new Date();
-    
+    month = (date.getMonth()+1) < 10 ? "0" +(date.getMonth()+1) : (date.getMonth()+1);
+    day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
     let image = "";
     
     if (req.file) {
@@ -16,10 +17,10 @@ exports.createPost = (req, res, next) => {
         id_user: req.id_user,
         content: req.body.content,
         image: image,
-        date: date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay(),
+        date: date.getFullYear() + "-" + month + "-" + day + " " + date.getHours() + ":" + date.getMinutes(),
         status: 1
     });
-    console.log(date)
+    console.log(post.date)
 
     db.query(`INSERT INTO post SET ?`, post, (error, result) => {
         if(error) {
@@ -43,11 +44,22 @@ exports.modifyPost = (req, res, next) => {
 // Supprimer un post
 exports.deletePost = (req, res, next) => {
     const id = req.params.id
-    db.query(`DELETE FROM post WHERE id = ?`, id, (error, result) => {
-        if (error) {
-            return res.status(400).json({ error: "Le post n'a pas pu être supprimé" })
+    const idUser = req.id_user
+    let post;
+
+    db.query(`SELECT * FROM post WHERE id = ?`, id, (error, result) => {
+        post = result[0]
+
+        if(post.id_user === idUser) {
+            db.query(`DELETE FROM post WHERE id = ?`, id, (error, result) => {
+                if (error) {
+                    return res.status(400).json({ error: "Le post n'a pas pu être supprimé" })
+                }
+                return res.status(200).json(result);
+            })
+        } else {
+            return res.status(403).json({ error: "Vous ne pouvez pas supprimer le post !"})
         }
-        return res.status(200).json(result);
     })
 }
 

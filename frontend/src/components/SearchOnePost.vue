@@ -10,7 +10,7 @@
         <div class="posts">
             <article class="post" v-if="post !== undefined">
                 
-                <div class="post-name"> Publié par <strong>{{ post.name }}</strong> - {{ datePost(post.date) }}</div>
+                <div class="post-name"> Publié par <strong> {{ post.name }} </strong> - {{ datePost(post.date) }}</div>
                 <div class="post-content" v-html="post.content"></div>
                 <div class="post-image"><img :src="post.image"></div>
                     
@@ -29,7 +29,7 @@
 
                 </div>
 
-                <button class="deletePost" @click="deletePost">Supprimer la publication</button>
+                <button class="deletePost" @click="deletePost" v-if="userId == post.id_user || admin == 1">Supprimer la publication</button>
 
             </article>      
         </div>
@@ -66,6 +66,10 @@ export default {
 
     mounted() {
         this.getOnePost();
+        this.userId = localStorage.getItem('userId')
+        console.log(this.userId)
+        this.admin = localStorage.getItem('admin')
+        console.log(this.admin)
     },
 
     methods: {
@@ -136,7 +140,6 @@ export default {
         deletePost() {
             const token = localStorage.getItem('token')
             const idPost = this.$route.params.id
-            console.log(idPost)
 
             axios.delete("http://localhost:3000/api/post/" + idPost, {
                 headers: {
