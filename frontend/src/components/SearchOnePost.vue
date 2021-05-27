@@ -63,15 +63,15 @@ export default {
             content: "",
             modifyContent: "",
             name: "",
+            userId: "",
+            admin: "",
         }
     },
 
     mounted() {
         this.getOnePost();
         this.userId = localStorage.getItem('userId')
-        console.log(this.userId)
         this.admin = localStorage.getItem('admin')
-        console.log(this.admin)
     },
 
     methods: {

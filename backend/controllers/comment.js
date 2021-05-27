@@ -4,11 +4,13 @@ const Comment = require('../models/Comment');
 // Création d'un commentaire
 exports.createComment = (req, res, next) => {
     date = new Date ();
+    month = (date.getMonth()+1) < 10 ? "0" +(date.getMonth()+1) : (date.getMonth()+1);
+    day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
     const comment = new Comment ({
         id_user: req.id_user,
         id_post: req.params.id,
         content: req.body.content,
-        date_creation: date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay(),
+        date_creation: date.getFullYear() + "-" + month + "-" + day + " " + date.getHours() + ":" + date.getMinutes(),
         status: 1
     })
     db.query(`INSERT INTO comment SET ?`, comment, (error, result) => {
