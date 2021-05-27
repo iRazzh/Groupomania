@@ -250,7 +250,7 @@ img{
     background-color: #FFF;
     border: 1px transparent black;
     border-radius: 10px;
-    width: 80%;
+    width: 87%;
     margin: auto;
     margin-bottom: 15px;
     text-align: initial;

@@ -23,3 +23,10 @@ export default {
 }
 
 </script>
+
+<style scoped>
+.wall{
+  width: 99%;
+  margin: auto;
+}
+</style>

@@ -11,7 +11,7 @@ exports.signup = (req, res, next) => {
     const password = req.body.password;
 
     const regexMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/; 
-    const regexName = /^([A-Z][a-z]*((\s)))+[A-Z][a-z]*$/;
+    const regexName = /^([A-Za-zÀ-ÖØ-öø-ÿ]*((\s)))+[A-Za-zÀ-ÖØ-öø-ÿ]*$/;
     const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/; // Minimum 8 caractères, 1 lettre majuscule, 1 lettre minuscule et 1 nombre
 
     if(email.match(regexMail) && name.match(regexName) && password.match(regexPassword)) {
