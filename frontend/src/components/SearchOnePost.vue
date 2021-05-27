@@ -164,11 +164,9 @@ export default {
         modifyPost() {
             
             const idPost = this.$route.params.id;
-            const idBdd = this.$user.id_user;
             const token = localStorage.getItem('token');
             const content = document.getElementsByClassName("contentPost")[0].value;
-            const userId = localStorage.getItem('userId')
-            if (userId === idBdd)
+
             axios.put("http://localhost:3000/api/post/" + idPost, {
                 idPost,
                 content
