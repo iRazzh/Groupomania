@@ -16,23 +16,13 @@
 
       <div class="formSignup">
         <label>Mot de passe :</label> <br />
-        <input
-          class="passwordSignup"
-          type="password"
-          placeholder="Exemple00"
-          required
-        />
+        <input class="passwordSignup" type="password" placeholder="Exemple00" required /> 
         <br />
       </div>
 
       <div class="formSignup">
         <label>Vérification du mot de passe :</label> <br />
-        <input
-          class="verifPasswordSignup"
-          type="password"
-          placeholder="Exemple00"
-          required
-        />
+        <input class="verifPasswordSignup" type="password" placeholder="Exemple00" required />
         <br />
       </div>
 

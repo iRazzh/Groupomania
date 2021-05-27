@@ -36,8 +36,8 @@ export default {
     },
     methods: {
 
-        createPost: function() 
-        {
+        createPost() {
+            
             const formCreate = document.getElementsByClassName("formCreate")[0];
             const token = localStorage.getItem("token");
             let data = new FormData(formCreate);

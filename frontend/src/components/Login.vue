@@ -4,25 +4,13 @@
     <form @submit.prevent = login()>
       <div class="formLogin">
         <label>Email :</label> <br />
-        <input 
-          class="emailLogin" 
-          type="text" 
-          placeholder="Email" 
-          required 
-          v-model = "email"
-        />
+        <input class="emailLogin" type="text" placeholder="Email" required v-model = "email" />
         <br />
       </div>
 
       <div class="formLogin">
         <label>Mot de passe :</label> <br />
-        <input
-          class="passwordLogin"
-          type="password"
-          placeholder="Mot de passe"
-          required
-          v-model = "password"
-        />
+        <input class="passwordLogin" type="password" placeholder="Mot de passe" required v-model = "password" />
         <br />
       </div>
 

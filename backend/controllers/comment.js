@@ -6,6 +6,7 @@ exports.createComment = (req, res, next) => {
     date = new Date ();
     month = (date.getMonth()+1) < 10 ? "0" +(date.getMonth()+1) : (date.getMonth()+1);
     day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    
     const comment = new Comment ({
         id_user: req.id_user,
         id_post: req.params.id,
