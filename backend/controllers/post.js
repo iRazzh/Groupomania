@@ -20,7 +20,6 @@ exports.createPost = (req, res, next) => {
         date: date.getFullYear() + "-" + month + "-" + day + " " + date.getHours() + ":" + date.getMinutes(),
         status: 1
     });
-    console.log(post.date)
 
     db.query(`INSERT INTO post SET ?`, post, (error, result) => {
         if(error) {

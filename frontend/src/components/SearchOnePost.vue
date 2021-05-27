@@ -14,16 +14,18 @@
                 <div class="post-content" v-html="post.content"></div>
                 <div class="post-image"><img :src="post.image"></div>
                     
+                <div class="modifyForm" v-if="userId == post.id_user || admin == 1">
                     <label class="titleModify" for="modify">Modifier le contenu du post : </label> <br>
                     <textarea class="contentPost" name="modify" placeholder="Une modification ?" v-model="content" ></textarea> <br>
                     <button class="modifyPost" @click="modifyPost" v-if="content !== ''">Modifier</button>
+                </div>
 
                 <div class="allComments">
 
                     <h3 class="titleComments">Commentaires :</h3>
                     <div class="comments" v-for="comment in comments" :key="comment">
                         <div class="comment-content"> {{ comment.content }} </div>
-                        <div><button class="deleteComment" @click="deleteComment(comment.id)"></button></div>
+                        <div><button class="deleteComment" @click="deleteComment(comment.id)" v-if="userId == comment.id_user || admin == 1"></button></div>
                         <div class="comment-name"> <strong>{{ comment.name }}</strong> le {{ datePost(comment.date_creation) }} </div>
                     </div>
 
