@@ -14,7 +14,7 @@ const postCtrl = require('../controllers/post');
 // Router de la création du post
 router.post('/create', auth, multer, postCtrl.createPost);
 // Router de la modification du post
-router.put('/:id', auth, multer, postCtrl.modifyPost);
+router.put('/:id', auth, postCtrl.modifyPost);
 // Router de la suppression du post
 router.delete('/:id', auth, postCtrl.deletePost);
 // Router de l'accès à tous les posts 

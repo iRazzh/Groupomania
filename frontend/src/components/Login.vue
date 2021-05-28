@@ -42,7 +42,7 @@ export default {
 
   methods: {
 
-    login: function() {
+    login(){
 
       const email = this.email;
       const password = this.password;

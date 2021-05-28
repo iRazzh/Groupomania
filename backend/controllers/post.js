@@ -24,7 +24,6 @@ exports.createPost = (req, res, next) => {
 
     db.query(`INSERT INTO post SET ?`, post, (error, result) => {
         if(error) {
-            // return res.status(400).json({ error: "Le post n'a pas pu être crée!" });
             return res.status(400).json({ error: error });
         }
         return res.status(201).json ({ message: "Post crée!" })
