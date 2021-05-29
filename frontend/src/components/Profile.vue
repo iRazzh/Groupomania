@@ -31,8 +31,8 @@ export default {
     },
 
     mounted(){
-        const token = localStorage.getItem('token')
-        document.getElementsByClassName("userName")[0].innerHTML = token.name
+        const name = localStorage.getItem('name')
+        document.getElementsByClassName("userName")[0].innerHTML = name
     },
 
     methods: {
