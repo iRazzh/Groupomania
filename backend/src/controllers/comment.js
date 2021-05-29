@@ -27,13 +27,21 @@ exports.createComment = (req, res, next) => {
 
 // Suppression d'un commentaire
 exports.deleteComment = (req, res, next) => {
-
     const id = req.params.id
+    const idUser = req.id_user
+    let comment;
 
-    db.query(`DELETE FROM comment WHERE id = ?` , id, (error, result) => {
-        
-        if (error) return res.status(400).json({ error: "Le commentaire n'a pas pu être supprimé" });
+    db.query(`SELECT * FROM comment WHERE id = ?`, id, (error, result) => {
+        comment = result[0]
 
-        return res.status(200).json(result);
-    });
+        if(comment.id_user === idUser || req.admin === 1) {
+            db.query(`DELETE FROM comment WHERE id = ?` , id, (error, result) => {
+                if (error) return res.status(400).json({ error: "Le commentaire n'a pas pu être supprimé" });
+                return res.status(200).json(result);
+            });
+
+        } else {
+            return res.status(403).json({ error: "Vous ne pouvez pas supprimer le commentaire !" })
+        }
+    })
 }

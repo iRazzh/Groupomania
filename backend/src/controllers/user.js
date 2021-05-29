@@ -63,9 +63,7 @@ exports.login = (req, res, next) => {
 
       res.status(200).json({ token, userId: id, name: name, admin: admin });
     });
-    
   });
-
 };
 
 // Supprime le compte d'un utilisateur

@@ -14,7 +14,7 @@
                 <div class="post-content" v-html="post.content"></div>
                 <div class="post-image"><img :src="post.image"></div>
                     
-                <div class="modifyForm" v-if="userId == post.id_user || admin == 1">
+                <div class="modifyForm" v-if="userId == post.id_user">
                     <label class="titleModify" for="modify">Modifier le contenu du post : </label> <br>
                     <textarea class="contentPost" name="modify" placeholder="Une modification ?" v-model="content" ></textarea> <br>
                     <button class="modifyPost" @click="modifyPost" v-if="content !== ''">Modifier</button>
