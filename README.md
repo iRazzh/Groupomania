@@ -40,4 +40,3 @@ sudo nano .env
 npm run start
 ```
 ---
-Necesidad de ayuda Enviar mensaje a https://github.com/iRazzh
