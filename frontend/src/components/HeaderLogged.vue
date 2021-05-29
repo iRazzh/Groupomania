@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <img src="../assets/icon_modify.png" alt="Logo de Groupomania">
+        <img src="../assets/icon.png" alt="Logo de Groupomania">
         <router-link to="/profile">
             <p>Votre profil</p>
         </router-link>
@@ -44,12 +44,9 @@ p{
     margin-bottom: 2rem;
     padding: 9px;
     width: 12rem;
-    background-color: #FFF;
+    background-color: rgba(239, 68, 68);
     border-radius: 20px;
     cursor: pointer;
-}
-.disconnect:hover{
-    background-color: #b7ebbb;
 }
 a{
     text-decoration: none;

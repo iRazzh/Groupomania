@@ -2,7 +2,7 @@
     <div class="profile">
         <header class="header">
             <router-link to="/wall">
-                <img src="../assets/icon-left-font_modify.png" alt="Logo de Groupomania">
+                <img src="../assets/icon-left-font.png" alt="Logo de Groupomania">
             </router-link>
         </header>
 
@@ -31,8 +31,8 @@ export default {
     },
 
     mounted(){
-        const name = localStorage.getItem('name')
-        document.getElementsByClassName("userName")[0].innerHTML = name
+        const token = localStorage.getItem('token')
+        document.getElementsByClassName("userName")[0].innerHTML = token.name
     },
 
     methods: {

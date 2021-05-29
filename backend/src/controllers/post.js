@@ -1,4 +1,4 @@
-const db = require('../sqlBDD');
+const db = require('../database/database');
 const fs = require('fs');
 const Post = require('../models/Post');
 const { userInfo } = require('os');

@@ -9,7 +9,6 @@ const helmet = require('helmet');
 // Ajout de "path" => Permet de travailler avec le système de fichier
 const path = require('path');
 
-
 // Importation de la route dédiée aux utilisateurs
 const userRoutes = require('./routes/user');
 // Importation de la route dédiée aux posts
@@ -19,11 +18,13 @@ const commentsRoutes = require('./routes/comment');
 
 // Système de sécurité CORS
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    next();
-  });
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  next();
+  
+});
 
 // Transformation des données en un objet JSON
 app.use(bodyParser.json());

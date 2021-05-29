@@ -7,7 +7,6 @@
 body{
   margin: 0;
   padding: 0;
-  background-color: #B0E0E6;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

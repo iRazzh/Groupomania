@@ -85,7 +85,7 @@ export default {
 button{
     padding: 9px;
     width: 12rem;
-    background-color: #FFF;
+    background-color: rgba(239, 68, 68);
     border-radius: 20px;
     cursor: pointer;
 }

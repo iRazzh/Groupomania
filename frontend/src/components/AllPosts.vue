@@ -73,6 +73,7 @@ h3{
     margin: auto;
 }
 .post{
+    background: rgb(255, 215, 215);
     border: 1px solid rgb(119, 119, 119);
     border-radius: 25px;
     width: 100%;
@@ -81,7 +82,6 @@ h3{
     margin-bottom: 5rem;
 }
 .post-name{
-    background-color: #FFF;
     border-radius: 25px 25px 0 0;
     padding: 1rem;
     border-bottom: 1px solid rgb(119, 119, 119);

@@ -3,7 +3,7 @@
 
         <header class="header">
             <router-link to="/wall">
-                <img src="../assets/icon_modify.png" alt="Logo de Groupomania">
+                <img src="../assets/icon.png" alt="Logo de Groupomania">
             </router-link>
         </header>
     
@@ -218,6 +218,7 @@ img{
     margin: auto;
 }
 .post{
+    background: rgb(255, 215, 215);
     border: 1px solid rgb(119, 119, 119);
     border-radius: 25px;
     width: 90%;
@@ -226,7 +227,6 @@ img{
     margin-bottom: 5rem;
 }
 .post-name{
-    background-color: #FFF;
     border-radius: 25px 25px 0 0;
     padding: 1rem;
     border-bottom: 1px solid rgb(119, 119, 119);
@@ -288,6 +288,9 @@ img{
     padding: 26px;
     margin-top: 15px;
     border-radius: 19px;
+}
+.addComment{
+    background: rgba(239, 68, 68);
 }
 .modifyPost, .addComment{
     padding: 6px;

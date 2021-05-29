@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
-require('dotenv').config()
+
+const JWT_TOKEN = process.env.JWT_TOKEN;
 
 module.exports = (req, res, next) => {
     try 
@@ -7,7 +8,7 @@ module.exports = (req, res, next) => {
         // Récupération du token dans le header, et du deuxième élément du tableau
         const token = req.headers.authorization.replace("Bearer ", "");
         // Vérification des token
-        const decodedToken = jwt.verify(token, process.env.TOKEN);
+        const decodedToken = jwt.verify(token, JWT_TOKEN);
         // Pour récupérer le user Id
         req.id_user = decodedToken.userId; 
         req.admin = decodedToken.adminRank;

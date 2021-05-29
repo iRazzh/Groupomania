@@ -6,7 +6,7 @@ const MIME_TYPES = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpg',
     'image/png': 'png'
-  };
+};
 
 // Permet de dire où enregistrer les images
 const storage = multer.diskStorage({
