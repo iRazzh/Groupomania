@@ -39,4 +39,3 @@ sudo nano .env
 ```
 npm run start
 ```
----
